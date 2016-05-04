@@ -1,0 +1,41 @@
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
+
+paginate: 10 # pagination based on number of posts
+paginate_path: "page:num"
+exclude: ["README.md"] # files to exclude
+highlighter: rouge
+markdown: kramdown
+disqus: mattmcnabbgithubio
+google_analytics: UA-69802890-1
+title: PowerShell Escape
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: PowerShell Escape
+
+description: a blog about Powershell, DevOps, and all things IT
+author:
+  name: Matt McNabb
+  email: mmcnabb@outlook.com
+  github: mattmcnabb
+  twitter: mcnabbmh
+  #pinterest: asd123
+  #linkedin: asd123
+  bio: Windows Systems Engineer and PowerShell enthusiast | 2016 PowerShell.org PowerShell Hero
+  email_md5: 726351295ec82e145928582f595aa3aa
+
+rss_path: feed.xml
+categories_path: categories.html
+tags_path: tags.html
+resources_path: resources.html
+
+# set it as url of an image
+# sidebar_background_image: https://www.dropbox.com/s/g9h23zrycedxtk5/sky.png?raw=1
+
+BASE_PATH:
+
+gems:
+  - jekyll-paginate
