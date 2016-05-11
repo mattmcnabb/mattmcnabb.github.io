@@ -3,12 +3,13 @@ layout: post
 title: Managing Office 365 User Licenses with PowerShell - Part 1
 categories: [Powershell, Office 365]
 comments: true
+permalink: 
 ---
 
-[Part1]: /2016/Office-365-Licensing_1/
-[Part2]: /2016/Office-365-Licensing_2/
-[Part3]: /2016/Office-365-Licensing_3/
-[Part4]: /2016/Office-365-Licensing_4/
+[Part1]: /2016/03/09/Office-365-Licensing_1/
+[Part2]: /2016/03/12/Office-365-Licensing_2/
+[Part3]: /2016/03/14/Office-365-Licensing_3/
+[Part4]: /2016/03/20/Office-365-Licensing_4/
 [Login]: /assets/media/ConnectMsolServiceCredPrompt.png
 
 Series: **Part 1** [Part 2][Part2] [Part 3][Part3] [Part 4][Part4]
