@@ -5,10 +5,10 @@ categories: [Powershell, Office 365]
 comments: true
 ---
 
-[Part1]: /Office-365-Licensing-1/
-[Part2]: /Office-365-Licensing-2/
-[Part3]: /Office-365-Licensing-3/
-[Part4]: /Office-365-Licensing-4/
+[Part1]: /Office-365-Licensing_1/
+[Part2]: /Office-365-Licensing_2/
+[Part3]: /Office-365-Licensing_3/
+[Part4]: /Office-365-Licensing_4/
 [Gist]:  https://gist.github.com/mattmcnabb/13c0f230bde0359e4aeb5dad0de84712
 
 Series: [Part 1][Part1] [Part 2][Part2] [Part 3][Part3] **Part 4**

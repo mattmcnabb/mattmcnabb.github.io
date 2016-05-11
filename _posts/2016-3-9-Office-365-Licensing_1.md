@@ -6,10 +6,10 @@ comments: true
 permalink: 
 ---
 
-[Part1]: /Office-365-Licensing-1/
-[Part2]: /Office-365-Licensing-2/
-[Part3]: /Office-365-Licensing-3/
-[Part4]: /Office-365-Licensing-4/
+[Part1]: /Office-365-Licensing_1/
+[Part2]: /Office-365-Licensing_2/
+[Part3]: /Office-365-Licensing_3/
+[Part4]: /Office-365-Licensing_4/
 [Login]: /assets/media/ConnectMsolServiceCredPrompt.png
 
 Series: **Part 1** [Part 2][Part2] [Part 3][Part3] [Part 4][Part4]
