@@ -2,6 +2,8 @@
 layout: post
 title: Take Your Powershell Profile on the Road
 categories: [onedrive, Powershell, profile]
+author: Matt McNabb
+comments: true
 ---
 
 [ScriptingGuy]: http://blogs.technet.com/b/heyscriptingguy/archive/2013/01/04/understanding-and-using-powershell-profiles.aspx

@@ -2,6 +2,8 @@
 layout: post
 title: Challenge Yourself with Powershell Programming Tasks
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [RosettaCode]: http://rosettacode.org
@@ -42,7 +44,7 @@ function Get-HailStone {
     {$_ -lt 1}     {return}
     1              {$n; return}
     {$n % 2 -eq 0} {$n; return Get-Hailstone ($n = $n / 2)}
-    {$n % 2 -ne 0} {$n; return Get-Hailstone ($n = ($n * 3) +1)}      
+    {$n % 2 -ne 0} {$n; return Get-Hailstone ($n = ($n * 3) +1)}
   }
 }
 {% endhighlight %}

@@ -2,6 +2,8 @@
 layout: post
 title: ISE Steroids - Make It Yours
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [ISE]: https://technet.microsoft.com/en-us/library/dd819494.aspx

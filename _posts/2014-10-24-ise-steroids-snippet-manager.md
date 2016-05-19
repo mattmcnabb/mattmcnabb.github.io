@@ -2,6 +2,8 @@
 layout: post
 title: ISE Steroids Snippet Manager
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [1]: /assets/media/Snippet1.png

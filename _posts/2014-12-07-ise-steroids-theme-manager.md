@@ -2,6 +2,8 @@
 layout: post
 title: ISE Steroids Theme Manager
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [DarkModern]: /assets/media/DarkTheme.png "The Dark Modern Theme"
@@ -52,7 +54,7 @@ Theme files for ISE Steroids are XML and are similar to native theme files for t
   <ScriptPaneBackgroundColor ColorARGB="#FF012456" />
   <CapitalizeMainMenuHeaders>true</CapitalizeMainMenuHeaders>
 {% endhighlight %}
-  
+
 While there is no menu for custom creating a theme the way you would in the ISE natively, there is really no need since you can simply change your colors on the fly using the context menu and then when you are happy with the results you can save the new theme to your appdata folder.
 
 If you want to copy any custom themes you have already created in the ISE to the new Steroids theme format, just apply your theme from the ISE options menu and then save it as a new Steroids theme. Here's my own take on the Solarized theme that I created a while back, now converted to an ISE Steroids theme:

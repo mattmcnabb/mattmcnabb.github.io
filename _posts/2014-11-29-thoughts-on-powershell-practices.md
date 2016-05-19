@@ -2,6 +2,8 @@
 layout: post
 title: Thoughts on Powershell Parameter Naming Conventions
 categories: [Active Directory, Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [MVA]: http://www.microsoftvirtualacademy.com/training-courses/using-powershell-for-active-directory

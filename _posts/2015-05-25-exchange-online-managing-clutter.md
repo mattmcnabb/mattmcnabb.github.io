@@ -2,6 +2,8 @@
 layout: post
 title: Managing Clutter in Exchange Online
 categories: [Office 365, Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [OfficeBlog]: http://blogs.office.com/2014/11/11/de-clutter-inbox-office-365/

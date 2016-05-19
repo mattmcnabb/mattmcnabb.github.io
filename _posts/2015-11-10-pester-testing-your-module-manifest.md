@@ -2,6 +2,8 @@
 layout: post
 title: Testing Your Module Manifest With Pester
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [Tests]: https://github.com/pester/Pester/blob/master/Pester.Tests.ps1
@@ -76,31 +78,31 @@ $ManifestPath = "$ModulePath\$ModuleName.psd1"
 
 # test the module manifest - exports the right functions, processes the right formats, and is generally correct
 Describe "Manifest" {
-    
+
     $ManifestHash = Invoke-Expression (Get-Content $ManifestPath -Raw)
-    
+
     It "has a valid manifest" {
         {
             $null = Test-ModuleManifest -Path $ManifestPath -ErrorAction Stop -WarningAction SilentlyContinue
         } | Should Not Throw
     }
-    
+
     It "has a valid root module" {
         $ManifestHash.RootModule | Should Be "$ModuleName.psm1"
     }
-    
+
     It "has a valid Description" {
         $ManifestHash.Description | Should Not BeNullOrEmpty
     }
-    
+
     It "has a valid guid" {
         $ManifestHash.Guid | Should Be '9dd7e9a4-8525-4fd1-aa13-3a063df4b264'
     }
-    
+
     It "has a valid prefix" {
         $ManifestHash.DefaultCommandPrefix | Should Not BeNullOrEmpty
     }
-    
+
     It "has a valid copyright" {
         $ManifestHash.CopyRight | Should Not BeNullOrEmpty
     }

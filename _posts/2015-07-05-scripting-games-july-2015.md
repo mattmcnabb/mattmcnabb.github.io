@@ -2,6 +2,8 @@
 layout: post
 title: Scripting Games July 2015 Puzzle
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [SGJuly]: http://powershell.org/wp/2015/07/04/2015-july-scripting-games-puzzle/

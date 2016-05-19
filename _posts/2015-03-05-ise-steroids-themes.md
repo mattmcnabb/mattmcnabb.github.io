@@ -2,6 +2,8 @@
 layout: post
 title: ISE Steroids Themes
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [Steroids]: http://www.powertheshell.com/isesteroids/

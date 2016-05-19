@@ -2,6 +2,8 @@
 layout: post
 title: Use Hotkeys to Customize the Powershell ISE
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [PowerTip]: http://powershell.com/cs/blogs/tips/archive/2015/12/08/detecting-key-presses-across-applications.aspx
@@ -19,7 +21,7 @@ function Test-KeyPress
             Checks to see if a key or keys are currently pressed.
 
             .DESCRIPTION
-            Checks to see if a key or keys are currently pressed. If all specified keys are pressed then will return true, but if 
+            Checks to see if a key or keys are currently pressed. If all specified keys are pressed then will return true, but if
             any of the specified keys are not pressed, false will be returned.
 
             .PARAMETER Keys
@@ -50,9 +52,9 @@ function Test-KeyPress
 
             .OUTPUTS
             System.Boolean
-    
+
     #>
-    
+
     [CmdletBinding()]
     param
     (
@@ -60,20 +62,20 @@ function Test-KeyPress
         [System.Windows.Forms.Keys[]]
         $Keys
     )
-    
+
     # use the User32 API to define a keypress datatype
     $Signature = @'
-    [DllImport("user32.dll", CharSet=CharSet.Auto, ExactSpelling=true)] 
-    public static extern short GetAsyncKeyState(int virtualKeyCode); 
+    [DllImport("user32.dll", CharSet=CharSet.Auto, ExactSpelling=true)]
+    public static extern short GetAsyncKeyState(int virtualKeyCode);
 '@
     $API = Add-Type -MemberDefinition $Signature -Name 'Keypress' -Namespace Keytest -PassThru
-    
+
     # test if each key in the collection is pressed
     $Result = foreach ($Key in $Keys)
     {
         [bool]($API::GetAsyncKeyState($Key) -eq -32767)
     }
-    
+
     # if all are pressed, return true, if any are not pressed, return false
     $Result -notcontains $false
 }
@@ -90,4 +92,4 @@ if (Test-KeyPress -Keys ControlKey) { Start-Steroids }
 
 Now when I launch the ISE, if I hold down the control key ISE Steroids will be loaded with no interaction from me. Alternatively you could use `Test-KeyPress` to execute just about any code in your profile so if you would like certain modules, variables, etc. to be conditionally available you can make that happen just by holding down a key or combination of keys.
 
-If you have any other ideas for how to use `Test-KeyPress`, I'd love to hear them! Hit me up on [Twitter](http://twitter.com/{{site.author.twitter}}) to discuss. 
+If you have any other ideas for how to use `Test-KeyPress`, I'd love to hear them! Hit me up on [Twitter](http://twitter.com/{{site.author.twitter}}) to discuss.

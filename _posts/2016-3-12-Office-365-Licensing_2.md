@@ -2,6 +2,7 @@
 layout: post
 title: Managing Office 365 User Licenses with PowerShell - Part 2
 categories: [Powershell, Office 365]
+author: Matt McNabb
 comments: true
 ---
 
@@ -16,14 +17,14 @@ Series: [Part 1][Part1] **Part 2** [Part 3][Part3] [Part 4][Part4]
 ## License Options
 
 ### Overview
-In the [previous blog post][Part1] I showed you how to connect to Azure Active Directory using PowerShell and assign a license sku to an Office 365 user which entitles a user for all the services contained therein. In many cases this is sufficient, but some organizations may have more specific needs regarding what services are available to its' users. For instance, you may want to provision Exchange to your users after you've migrated from another mail service, but you want to wait a bit to deploy Sharepoint, Skype for Business, and Onedrive for Business until your users have gotten used to Office 365. To achieve this you'll need to use selective license entitlement. This can be done in the Admin Center by deselecting the services that are included with a license sku, 
+In the [previous blog post][Part1] I showed you how to connect to Azure Active Directory using PowerShell and assign a license sku to an Office 365 user which entitles a user for all the services contained therein. In many cases this is sufficient, but some organizations may have more specific needs regarding what services are available to its' users. For instance, you may want to provision Exchange to your users after you've migrated from another mail service, but you want to wait a bit to deploy Sharepoint, Skype for Business, and Onedrive for Business until your users have gotten used to Office 365. To achieve this you'll need to use selective license entitlement. This can be done in the Admin Center by deselecting the services that are included with a license sku,
 
 ![][ServicePlans]
 
 but to do this in bulk we'll need to use PowerShell.
 
 ### Finding available service plans
-Each license sku in Office 365 contains one or more service plans that can be enabled to provision a service for a user. These service plans include things like Exchange, Sharepoint, Skype for Business, and even external services like Sway or Intune. In part 1 of this series we looked at the Office 365 for Education license - let's take a look at how to find the services that are available in that sku: 
+Each license sku in Office 365 contains one or more service plans that can be enabled to provision a service for a user. These service plans include things like Exchange, Sharepoint, Skype for Business, and even external services like Sway or Intune. In part 1 of this series we looked at the Office 365 for Education license - let's take a look at how to find the services that are available in that sku:
 
 ``` console
 Get-MsolAccountSku | Where-Object AccountSkuId -like '*Woffpack_fac*' | Select-Object -ExpandProperty ServiceStatus

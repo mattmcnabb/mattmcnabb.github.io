@@ -2,6 +2,7 @@
 layout: post
 title: Managing Office 365 User Licenses with PowerShell - Part 3
 categories: [Powershell, Office 365]
+author: Matt McNabb
 comments: true
 ---
 

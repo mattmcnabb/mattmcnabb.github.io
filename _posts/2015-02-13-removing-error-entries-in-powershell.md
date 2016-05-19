@@ -2,6 +2,8 @@
 layout: post
 title: Remove Error Entries in Powershell Functions
 categories: [Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [NullArray]: /assets/media/NullArrayError.png

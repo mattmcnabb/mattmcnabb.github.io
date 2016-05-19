@@ -2,6 +2,7 @@
 layout: post
 title: Managing Office 365 User Licenses with PowerShell - Part 4
 categories: [Powershell, Office 365]
+author: Matt McNabb
 comments: true
 ---
 
@@ -75,7 +76,7 @@ try
 catch [Microsoft.Online.Administration.Automation.MicrosoftOnlineException]
 {
     $Splat.Remove('AddLicenses')
-    Set-MsolUserLicense @Splat -ErrorAction Stop   
+    Set-MsolUserLicense @Splat -ErrorAction Stop
 }
 {% endhighlight %}
 
@@ -95,12 +96,12 @@ $Engineering = Get-MsolUser -Department Engineering -All
 
 $SalesTemplate = @{
     AccountSkuId = contoso:ENTERPRISEPACK
-    EnabledPlans = "EXCHANGE_S_STANDARD","MCOSTANDARD"    
+    EnabledPlans = "EXCHANGE_S_STANDARD","MCOSTANDARD"
 }
 
 $EngineeringTemplate = @{
     AccountSkuId = contoso:ENTERPRISEPACK
-    EnabledPlans = "EXCHANGE_S_STANDARD","SHAREPOINTENTERPRISE"    
+    EnabledPlans = "EXCHANGE_S_STANDARD","SHAREPOINTENTERPRISE"
 }
 
 $Sales | Set-O365UserLicense -LicenseTemplate $SalesTemplate
@@ -108,4 +109,4 @@ $Engineering | Set-O365UserLicense -LicenseTemplate $EngineeringTemplate
 
 {% endhighlight %}
 
-That's all for this blog series on Office 365 user licensing. This series was a challenge to write as I had been kicking these ideas around in my head for quite some time, but fully realizing them and committing them to paper took some effort! But I had fun and have already seen the benefit of this new approach in my own Office 365 licensing scripts. I hope you find this as useful as I have! Thanks for reading! 
+That's all for this blog series on Office 365 user licensing. This series was a challenge to write as I had been kicking these ideas around in my head for quite some time, but fully realizing them and committing them to paper took some effort! But I had fun and have already seen the benefit of this new approach in my own Office 365 licensing scripts. I hope you find this as useful as I have! Thanks for reading!

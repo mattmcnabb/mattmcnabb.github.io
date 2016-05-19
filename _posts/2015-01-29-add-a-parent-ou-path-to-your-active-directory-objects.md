@@ -2,6 +2,8 @@
 layout: post
 title: Add a Parent OU Path to Your Active Directory Objects
 categories: [Active Directory, Powershell]
+author: Matt McNabb
+comments: true
 ---
 
 [Splatting]: https://technet.microsoft.com/en-us/magazine/gg675931.aspx
@@ -31,8 +33,8 @@ First we need to define what it is that we want to add to our objects. In this c
 
 {% highlight Powershell %}
 (Get-ADUser Matt).GetType()
-IsPublic IsSerial Name      BaseType   
--------- -------- ----      --------               
+IsPublic IsSerial Name      BaseType
+-------- -------- ----      --------
 True     False    ADUser    Microsoft.ActiveDirectory.Management.ADAccount
 {% endhighlight %}
 
@@ -41,8 +43,8 @@ Notice the `Name` field is `ADUser`. While this is a valid type this would only 
 {% highlight Powershell %}
 PS C:\&gt; (get-adcomputer MattsPC).gettype()
 
-IsPublic IsSerial Name            BaseType           
--------- -------- ----            --------          
+IsPublic IsSerial Name            BaseType
+-------- -------- ----            --------
 True     False    ADComputer      Microsoft.ActiveDirectory.Management.ADAccount
 {% endhighlight %}
 

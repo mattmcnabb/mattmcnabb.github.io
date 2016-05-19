@@ -2,6 +2,8 @@
 layout: post
 title: What's in Your Powershell Profile?
 categories: [Powershell, profile]
+author: Matt McNabb
+comments: true
 ---
 
 [PortableProfile]: /posts/portable-profile
@@ -38,7 +40,7 @@ Import-Module GeneralLibrary
 switch ($Env:PROCESSOR_ARCHITECTURE)
 {
     'x86'   {$AzureModulePath = "$env:ProgramFiles\Microsoft SDKs\Azure\powershell\ServiceManagement\Azure\Azure.psd1"}
-    'AMD64' {$AzureModulePath = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\powershell\ServiceManagement\Azure\Azure.psd1"} 
+    'AMD64' {$AzureModulePath = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\powershell\ServiceManagement\Azure\Azure.psd1"}
 }
 
 ### Create a Cim session to PS01v for printer operations
@@ -96,7 +98,7 @@ function prompt {
         Write-Host $('&gt;' * ($NestedPromptLevel + 1)) -NoNewline -ForegroundColor Green
         return ' '
     }
-    else 
+    else
     {
         Write-Host "$(Get-Location)" -NoNewline -ForegroundColor yellow
         Write-Host "[$(Get-LastExecutionTime)]" -NoNewline -ForegroundColor Green
@@ -119,7 +121,7 @@ Import-Module GeneralLibrary
 switch ($Env:PROCESSOR_ARCHITECTURE)
 {
     'x86'   {$AzureModulePath = "$env:ProgramFiles\Microsoft SDKs\Azure\powershell\ServiceManagement\Azure\Azure.psd1"}
-    'AMD64' {$AzureModulePath = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\powershell\ServiceManagement\Azure\Azure.psd1"} 
+    'AMD64' {$AzureModulePath = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\powershell\ServiceManagement\Azure\Azure.psd1"}
 }
 {% endhighlight %}
 
@@ -141,8 +143,8 @@ I use the $PSDefaultParameterValues automatic variable to configure default valu
 $PSDefaultParameterValues = @{
     'Get-Printer:CimSession'                = $Cimps01
     'Get-PrinterDriver:CimSession'          = $Cimps01
-    'Get-PrinterPort:CimSession:CimSession' = $Cimps01  
-    
+    'Get-PrinterPort:CimSession:CimSession' = $Cimps01
+
     'Export-Csv:NoTypeInformation' = $true
 }
 {% endhighlight %}
