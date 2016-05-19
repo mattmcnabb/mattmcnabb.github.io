@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Take Your Powershell Profile on the Road
-categories: [onedrive, Powershell, profile]
+categories: [Onedrive, Powershell, Profile]
 author: Matt McNabb
 comments: true
 ---

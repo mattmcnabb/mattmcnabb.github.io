@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Testing Your Module Manifest With Pester
-categories: [Powershell]
+categories: [Powershell, Pester]
 author: Matt McNabb
 comments: true
 ---
