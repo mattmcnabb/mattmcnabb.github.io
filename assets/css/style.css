@@ -1,4 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:500&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Source Code Pro:500&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Source Sans Pro:500&subset=latin,latin-ext);
 
 /* customizations */
 pre code.language-console
@@ -7,6 +9,7 @@ pre code.language-console
     padding: 1em 1em;
 	background: #000080;
     color: #edeef0;
+	font-family: "Source Code Pro";
 	font-size: 16px;
     margin-bottom: 1.3em;
 	font-weight: normal;
@@ -20,6 +23,7 @@ pre code.language-consoleerror
     padding: 1em 1em;
 	background: #000080;
     color: #f00000;
+	font-family: "Source Code Pro";
 	font-size: 16px;
     margin-bottom: 1.3em;
 	font-weight: normal;
@@ -27,10 +31,11 @@ pre code.language-consoleerror
     display: block;
 }
 
-pre 
+pre
 {
 	border: none;
 	background-color: #ffffff;
+	font-family: "Source Code Pro";
 	font-size: 16px;
 }
 /* end customizations */
@@ -152,14 +157,14 @@ article.home div a, article.home pre a { color: #2c3e50; }
 article.home div a:hover, article.home pre a:hover { color: #2c3e50; text-decoration: none; }
 article img { max-width: 100%; }
 
-h1,h2,h3,h4,h5,h6 { font-family: 'Ubuntu', sans-serif; }
+h1,h2,h3,h4,h5,h6 { font-family: 'Source Sans Pro', sans-serif; }
 article.home h1,
 article.home h2,
 article.home h3,
 article.home h4,
 article.home h5,
 article.home h6 {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #f2756a;
 }
 
@@ -183,7 +188,7 @@ article.home h4 a:hover {
 
 footer {
 	padding-top: 15px;
-	font-family: 'Ubuntu';
+	font-family: 'Source Sans Pro';
 }
 
 /* nav-vertical-tabs component */
