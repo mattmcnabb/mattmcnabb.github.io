@@ -46,7 +46,8 @@ It 'has a valid license Uri' {
 
  Now when my build tasks run, if the module manifest doesn't have the correct values then the Pester tests will catch this and the publish task won't even run. Pretty cool!
 
- ###Update 5/29/2016
+ ### Update 5/29/2016
+
  I have corrected the assertion in the `It` block named "gallery tags don't contain spaces"  to use the `Not` keyword, instead of using a boolean to test the regex match like this
 
  {%highlight Powershell%}
