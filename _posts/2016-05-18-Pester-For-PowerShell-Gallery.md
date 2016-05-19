@@ -10,7 +10,7 @@ permalink:
 
 I ran into a problem recently when running a TeamCity build process for a PowerShell module that I have published to the PowerShell Gallery. The build task continually returned errors and I couldn't quite figure out what was going on. I decided to run Publish-Module locally to troubleshoot the issue and was surprised to see this error returned:
 
-```console
+```consoleerror
 C:\Publish.ps1 : Failed to publish module 'O365ServiceCommunications': 'Failed to process request. 'A nuget package's Tags 
 property extracted from the PowerShell manifest may not contain spaces: 'Office 365'.'. 
 The remote server returned an error: (500) Internal Server Error..
