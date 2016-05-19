@@ -1,6 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu:500&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:500&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:500&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
 /* customizations */
 pre code.language-console
