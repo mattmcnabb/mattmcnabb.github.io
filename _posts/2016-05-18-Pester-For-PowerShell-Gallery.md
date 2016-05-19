@@ -26,7 +26,7 @@ To prevent this from happening in the future I wrote a simple test to make sure 
 It "gallery tags don't contain spaces" {
     foreach ($Tag in $ManifestHash.PrivateData.Values.tags)
     {
-        $Tag -notmatch '\s' | Should Be $true
+        $Tag | Should Not Match '\s'
     }
 }
 
@@ -45,3 +45,11 @@ It 'has a valid license Uri' {
 {% endhighlight %}
 
  Now when my build tasks run, if the module manifest doesn't have the correct values then the Pester tests will catch this and the publish task won't even run. Pretty cool!
+
+ UPDATE: I have corrected the assertion in the `It` block named `gallery tags don't contain spaces`  to use the `Not` keyword, instead of using a boolean to test the regex match like this
+
+ {%highlight Powershell%}
+ $Tag -notmatch '\s' | Should Be $true
+ {% endhighlight %}
+
+ I wasn't aware of how to properly negate an assertion - thanks to Dave Wyatt for the suggestion!
