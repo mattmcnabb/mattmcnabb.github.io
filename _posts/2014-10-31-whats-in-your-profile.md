@@ -14,7 +14,7 @@ This is a question you see often in Powershell blogs and forums. Powershell prof
 
 In my [previous post][PortableProfile] I went over how to make a portable Powershell profile. In this post I'll go over what I have in my profile scripts and why.
 
-The Main Profile
+### The Main Profile
 
 In this profile script I configure most of the settings that will apply to both the Powershell console and the ISE:
 
@@ -171,6 +171,8 @@ Import-IseSnippet -Path "$Dirscripts\Snippets\" -Recurse
 Remove-ISEUntitled
 Import-ISEEditorState -Path "$Dirscripts\temp"
 {% endhighlight %}
+
+### Other scripts
 
 The ISEConfig script above also calls another profile script - load-addons.ps1. This script uses some of the functions in my ISELibrary module to create ISE add-ons. These add-ons take advantage of the extensibility of the ISE object model and allow you to create ISE menu items that run Powershell code and can be called with a keyboard shortcut.
 

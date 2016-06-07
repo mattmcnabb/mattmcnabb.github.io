@@ -24,7 +24,15 @@ First, some prerequisites:
 
 2. The Clutter cmdlets will only work on server version 15.1 (Build 166.22). To manage Clutter with Powershell, both the server that you connect to via Powershell and the server that the mailboxes you are managing must be updated to this version. Microsoft is working to make sure that all Exchange Online servers are updated as quickly as possible, but you may still have some mailboxes that are on a prior version. If this is the case you will get an error when targeting those mailboxes with the Clutter cmdlets:
 
-![][Clutter]
+``` consoleerror
+Error on proxy command 'Get-Clutter -Identity:'user@domainname.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=NAMPR123h050,DC=prod,DC=outlook,DC=com'' to
+server servname.namprd77.prod.outlook.com: Server version 15.01.0154.0000, Proxy method PSWS:
+Cmdlet error with following error message:
+System.Management.Automation.parentContainsErrorRecordException: The term 'Get-clutter' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+    + Category Info         : NotSpecified: (:) [Get-Clutter], CmdletProxyException
+    + FullyQua1ifiedErrorId : [Server-BY2PR023408h,RequestId=z25268ceb-120e-4f43-9b35-33Ec0ac02c5,Timestamp=5/25/2015 1:42:.27 PM [Failurecategoryzcmdlet-cmdletproxyexception] 5FE2AEFD,Microsoft.Exchange.Management.powershell.Support.GetC1utter
+    + PSComputerName        : pod15050.psh.outlook.com
+```
 
 ### Turning Clutter Off
 There is currently no way to disable Clutter from being on by default for your entire tenant - you will have to do this for all your mailboxes now and for any new mailboxes that you don't want to have Clutter turned on for.  You can disable Clutter manually for a mailbox by running the `Set-Clutter` cmdlet:

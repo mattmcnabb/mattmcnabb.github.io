@@ -86,6 +86,6 @@ Here are some other tasks I have provided solutions to:
 
 [I Before E Except After C][IBeforeE]
 
-So what are you waiting for? Get out there and attach an unsolved task, or let me know how you would solve the problems I posted.
+So what are you waiting for? Get out there and attack an unsolved task, or let me know how you would solve the problems I posted.
 
 **P.S.** For fun and extra credit, Google 'recursion.' ;)
