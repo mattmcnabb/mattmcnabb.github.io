@@ -1,7 +1,7 @@
 ---
 layout: post
 title: What's in Your Powershell Profile?
-categories: [Powershell, profile]
+categories: [Powershell, Profile]
 author: Matt McNabb
 comments: true
 ---

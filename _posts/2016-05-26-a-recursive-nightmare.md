@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Office 365 Preservation Policies, or A Recursive Nightmare
-categories: [Office365]
+categories: [Office 365]
 author: Matt McNabb
 comments: true
 ---
