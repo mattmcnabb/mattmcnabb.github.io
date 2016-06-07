@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Use Hotkeys to Customize the Powershell ISE
-categories: [Powershell]
+categories: [Powershell, Editors]
 author: Matt McNabb
 comments: true
 ---

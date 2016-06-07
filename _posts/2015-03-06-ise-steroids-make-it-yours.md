@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ISE Steroids - Make It Yours
-categories: [Powershell]
+categories: [Powershell, Editors]
 author: Matt McNabb
 comments: true
 ---

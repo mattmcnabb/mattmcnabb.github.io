@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Powershell Studio 2015 Solarized Color Scheme
-categories: [Powershell]
+categories: [Powershell, Editors]
 author: Matt McNabb
 comments: true
 ---
