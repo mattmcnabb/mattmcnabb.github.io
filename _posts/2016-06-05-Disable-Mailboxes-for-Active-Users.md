@@ -11,6 +11,7 @@ comments: true
 [LitHold]: https://technet.microsoft.com/en-us/library/dn743673%28v=exchg.150%29.aspx?f=255
 [InPlace]: https://technet.microsoft.com/en-us/library/dd979797(v=exchg.150).aspx
 [LicenseBlog]: /Office-365-Licensing_1
+[Rule]: https://technet.microsoft.com/en-us/library/jj919238%28v=exchg.150%29.aspx?f=255&MSPPError=-2147217396
 
 This will be a quick post to detail the steps I took to resolve an issue in Exchange Online where we had a very specific use case for mailbox compliance.
 
@@ -38,4 +39,18 @@ You can remove the Exchange Online license using the Office 365 Admin Center, or
 
 This one was tricky. Although removing the Exchange license for a user removes their access to their mailbox, the mailbox itself can still receive email messasges. While this is not a huge deal, I didn't want to create the false impression that a deprovisioned mailbox was still in active use, so I decided to leverage a transport rule to handle this.
 
+To create a transport rule that prevents sending and receving for these mailboxes, first you'll need to create a new distribution group and add your mailboxes to it. I called mine "DisabledMailboxes". Once you've done this, create a new transport rule with the following conditions:
+
+1. If the message is sent to a member of the group "DisabledMailboxes@domain.onmicrosoft.com"
+
+2. reject the message and include the explanation 'The mailbox you attempted to send to no longer exists on the server!' with the status code '5.7.1'
+
+3. and stop processing more rules
+
+If you need more information creating transport rules, go [Rule][here].
+
 ### 4. Delete users
+
+After the first 3 steps above are completed, what you're left with is an active user with a disconnected mailbox that is on Litigation Hold. Ultimately users will be deleted when they are no longer a part of your organization. When this happens Exchange will take over and convert the active mailbox to an inactive one. The mailbox data will the be retained until the end of the Litigation Hold duration.
+
+I hope you've found this article useful - thanks for reading!
