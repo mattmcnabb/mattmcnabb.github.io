@@ -95,14 +95,21 @@ $Sales = Get-MsolUser -Department Sales -All
 $Engineering = Get-MsolUser -Department Engineering -All
 
 $SalesTemplate = @{
-    AccountSkuId = contoso:ENTERPRISEPACK
+    AccountSkuId = "contoso:ENTERPRISEPACK"
     EnabledPlans = "EXCHANGE_S_STANDARD","MCOSTANDARD"
 }
 
-$EngineeringTemplate = @{
-    AccountSkuId = contoso:ENTERPRISEPACK
-    EnabledPlans = "EXCHANGE_S_STANDARD","SHAREPOINTENTERPRISE"
-}
+$EngineeringTemplate = @(
+    @{
+        AccountSkuId = contoso:ENTERPRISEPACK
+        EnabledPlans = "EXCHANGE_S_STANDARD"
+    },
+
+    @{
+        AccountSkuId = "contoso:PROJECTONLINE_PLAN_1"
+        EnabledPlans = "SHAREPOINT_PROJECT_EDU","SHAREPOINTENTERPRISE_EDU"
+    }
+)
 
 $Sales | Set-O365UserLicense -LicenseTemplate $SalesTemplate
 $Engineering | Set-O365UserLicense -LicenseTemplate $EngineeringTemplate
