@@ -13,6 +13,7 @@ comments: true
 [LicenseBlog]: /Office-365-Licensing_1
 [Rule]: https://technet.microsoft.com/en-us/library/jj919238%28v=exchg.150%29.aspx?f=255&MSPPError=-2147217396
 
+
 This will be a quick post to detail the steps I took to resolve an issue in Exchange Online where we had a very specific use case for mailbox compliance.
 
 We have a type of user that only has need of a mailbox for a certain period of time, and once this time is passed then according to our policy access to that mailbox will be removed. However, other services in Office 365 such as Onedrive for Business and the Office Pro Plus subscription will need to be retained. Our compliance policy also dictates that the mailbox data will need to be retained for an extended period of time. We user Litigation Hold to achieve this retention.
