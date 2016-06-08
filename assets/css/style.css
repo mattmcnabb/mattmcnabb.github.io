@@ -34,6 +34,24 @@ pre
 	font-family: "Source Code Pro";
 	font-size: 14px;
 }
+
+blockquote
+{
+	background-color: #eee;
+	margin: 30px 0px 30px;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: wf_segoe-ui_light,wf_segoe-ui_semilight,wf_segoe-ui_normal,HelveticaNeue-Thin,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,sans-serif;
+}
+
+body
+{
+	font-family: wf_segoe-ui_normal,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+}
 /* end customizations */
 
 body{
