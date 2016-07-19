@@ -33,18 +33,18 @@ function Test-PSCredential
 
 This parameter will accept a pre-created credential object and nothing else:
 
-``` Console
+``` console
 PS c:\> $Cred = Get-Credential
 PS c:\> Test-PSCredential -Credential $Cred
 ```
 
 However, if you want to pass in a string username you're out of luck:
 
-``` Console
+``` console
 PS c:\> Test-PSCredential -Credential matt
 ```
 
-``` ConsoleError
+``` consoleerror
 Test-PSCredential : Cannot process argument transformation on parameter 'Credential'. Cannot convert the "matt"
 value of type "System.String" to type "System.Management.Automation.PSCredential".
 At line:1 char:31
@@ -77,7 +77,7 @@ You can read about how this attribute works [here][CredAttrExplain]. When you us
 
 So I attempted to demonstrate this approach in my demo and found that when I ran `Test-PSCredential` I didn't receive an error - it behaved exactly the same way as using `CredentialAttribute()`! It seems that the `PSCredential` class has gotten a bit of an upgrade in PowerShell 5.0. Let's check it out:
 
-``` Console
+``` console
 Trace-Command -Expression {Test-PSCredential -Credential matt} -Name ParameterBinding -PSHost
 DEBUG: ParameterBinding Information: 0 : BIND arg [matt] to parameter [Credential]
 DEBUG: ParameterBinding Information: 0 :     Executing DATA GENERATION metadata: [System.Management.Automation.CredentialAttribute]
