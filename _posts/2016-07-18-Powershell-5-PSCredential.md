@@ -16,7 +16,7 @@ During a recent talk I gave at the Cincinnati PowerShell User Group, I briefly d
 
 ### PowerShell 4.0 - The Way We Were
 
-In PowerShell 4 and previous versions we could specify that a function parameter should accept objects of type system.management.automation.PSCredential, or use the type adapter [PSCredential] starting in v3.0:
+In PowerShell 2 and above we could specify that a function parameter should accept objects of type `System.Management.Automation.PSCredential`, or use the type adapter `[PSCredential]` starting in v3.0:
 
 {% highlight PowerShell %}
 function Test-PSCredential
@@ -69,13 +69,13 @@ function Test-CredentialAttribute
 }
 {% endhighlight %}
 
-You can read about how this attribute works [here][CredAttrExplain]. Also, for further reading, here is the article on the [ArgumentTransformationAttribute class][ArgTransform], which is inherited by the CredentialAttribute class. When you use this attribute your credential parameter will happily accept either credential object or a string username, in which case you'll be prompted to enter the password:
+You can read about how this attribute works [here][CredAttrExplain]. When you use this attribute your credential parameter will happily accept either credential object or a string username, in which case you'll be prompted to enter the password:
 
 ![][PopUp]
 
 ### PowerShell 5.0
 
-So I attempted to demonstrate this approach in my demo and found that when I ran Test-PSCredential I didn't receive an error - it behaved exactly the same way as using CredentialAttribute()! It seems that the PSCredential class has gotten a bit of an upgrade in PowerShell 5.0. Let's check it out:
+So I attempted to demonstrate this approach in my demo and found that when I ran `Test-PSCredential` I didn't receive an error - it behaved exactly the same way as using `CredentialAttribute()`! It seems that the `PSCredential` class has gotten a bit of an upgrade in PowerShell 5.0. Let's check it out:
 
 ``` Console
 Trace-Command -Expression {Test-PSCredential -Credential matt} -Name ParameterBinding -PSHost
@@ -89,6 +89,9 @@ DEBUG: ParameterBinding Information: 0 :         Parameter and arg types the sam
 DEBUG: ParameterBinding Information: 0 :     BIND arg [System.Management.Automation.PSCredential] to param [Credential] SUCCESSFUL
 ```
 
-Using Trace-Command we can watch the parameter binding process and see that PSCredential is now leveraging the CredentialAttribute argument transformation in the background! This makes it really easy to create flexible function parameters that accept either a credential object, or a simple string username.
+Using `Trace-Command` we can watch the parameter binding process and see that `PSCredential` is now leveraging the `CredentialAttribute` argument transformation in the background! This makes it really easy to create flexible function parameters that accept either a credential object, or a simple string username.
 
-I'm not sure when this feature was added to the PSCredential class as the [MSDN documentation][PSCredential] doesn't seem to allude to this at all. Also, keep in mind that since this was only added in PowerShell 5.0, you'll need to continue using the CredentialAttribute() decoration to support downlevel versions of PowerShell.
+I'm not sure when this feature was added to the `PSCredential` class as the [MSDN documentation][PSCredential] doesn't seem to allude to this at all. Also, keep in mind that since this was only added in PowerShell 5.0, you'll need to continue using the `CredentialAttribute()` decoration to support downlevel versions of PowerShell.
+
+### Extra Credit
+The above MSDN article on the `CredentialAttribute` class states that it inherits from the [ArgumentTransformationAttribute class][ArgTransform]. I find this intriguing and would love to learn more about argument transformations and if any other classes inherit from this or leverage it's functionality. If you have any background on this class, please hit me up or blog about it somewhere.
