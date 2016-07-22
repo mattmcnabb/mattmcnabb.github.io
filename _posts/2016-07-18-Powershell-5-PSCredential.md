@@ -34,14 +34,14 @@ function Test-PSCredential
 This parameter will accept a pre-created credential object and nothing else:
 
 ``` console
-PS c:\> $Cred = Get-Credential
-PS c:\> Test-PSCredential -Credential $Cred
+$Cred = Get-Credential
+Test-PSCredential -Credential $Cred
 ```
 
 However, if you want to pass in a string username you're out of luck:
 
 ``` console
-PS c:\> Test-PSCredential -Credential matt
+Test-PSCredential -Credential matt
 ```
 
 ``` consoleerror
@@ -79,6 +79,7 @@ So I attempted to demonstrate this approach in my demo and found that when I ran
 
 ``` console
 Trace-Command -Expression {Test-PSCredential -Credential matt} -Name ParameterBinding -PSHost
+
 DEBUG: ParameterBinding Information: 0 : BIND arg [matt] to parameter [Credential]
 DEBUG: ParameterBinding Information: 0 :     Executing DATA GENERATION metadata: [System.Management.Automation.CredentialAttribute]
 DEBUG: ParameterBinding Information: 0 :         result returned from DATA GENERATION: System.Management.Automation.PSCredential
