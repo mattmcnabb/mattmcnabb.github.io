@@ -18,33 +18,22 @@ During a recent talk I gave at the Cincinnati PowerShell User Group, I briefly d
 
 In PowerShell 2 and above we could specify that a function parameter should accept objects of type `System.Management.Automation.PSCredential`, or use the type adapter `[PSCredential]` starting in v3.0:
 
-{% highlight PowerShell %}
-function Test-PSCredential
-{
-    param
-    (
-        [PSCredential]
-        $Credential
-    )
-
-    $Credential
-}
-{% endhighlight %}
+{% gist 68e381f01905177671ce133ef147e382 1.ps1 %}
 
 This parameter will accept a pre-created credential object and nothing else:
 
-``` console
-$Cred = Get-Credential
-Test-PSCredential -Credential $Cred
+```powershell
+PS> $Cred = Get-Credential
+PS> Test-PSCredential -Credential $Cred
 ```
 
 However, if you want to pass in a string username you're out of luck:
 
-``` console
-Test-PSCredential -Credential matt
+```powershell
+PS> Test-PSCredential -Credential matt
 ```
 
-``` consoleerror
+```console
 Test-PSCredential : Cannot process argument transformation on parameter 'Credential'. Cannot convert the "matt"
 value of type "System.String" to type "System.Management.Automation.PSCredential".
 At line:1 char:31
@@ -56,18 +45,7 @@ At line:1 char:31
 
 To do this we need to use the [System.Management.Automation.CredentialAttribute()][CredentialAttribute] parameter attribute:
 
-{% highlight PowerShell %}
-function Test-CredentialAttribute
-{
-    param
-    (
-        [System.Management.Automation.CredentialAttribute()]
-        $Credential
-    )
-
-    $Credential
-}
-{% endhighlight %}
+{% gist 68e381f01905177671ce133ef147e382 2.ps1 %}
 
 You can read about how this attribute works [here][CredAttrExplain]. When you use this attribute your credential parameter will happily accept either credential object or a string username, in which case you'll be prompted to enter the password:
 
@@ -77,8 +55,8 @@ You can read about how this attribute works [here][CredAttrExplain]. When you us
 
 So I attempted to demonstrate this approach in my demo and found that when I ran `Test-PSCredential` I didn't receive an error - it behaved exactly the same way as using `CredentialAttribute()`! It seems that the `PSCredential` class has gotten a bit of an upgrade in PowerShell 5.0. Let's check it out:
 
-``` console
-Trace-Command -Expression {Test-PSCredential -Credential matt} -Name ParameterBinding -PSHost
+```powershell
+PS> Trace-Command -Expression {Test-PSCredential -Credential matt} -Name ParameterBinding -PSHost
 
 DEBUG: ParameterBinding Information: 0 : BIND arg [matt] to parameter [Credential]
 DEBUG: ParameterBinding Information: 0 :     Executing DATA GENERATION metadata: [System.Management.Automation.CredentialAttribute]
