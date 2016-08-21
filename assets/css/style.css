@@ -53,8 +53,9 @@ body{
 	position: fixed;
 	top: 0px;
 	padding-top: 10%;
-	background-color: #2c3e50;
-	color: #fff;
+	/*background-color: #2c3e50;*/
+	background-color: #012456;
+	color: #f5f5f5;
 }
 
 .sidebar-header {

@@ -6,28 +6,19 @@ pre.highlight,
     font-family: "Source Code Pro","Consolas","monospace";
 }
 
-
 /* console highlight */
 .language-posh pre.highlight, .language-posh .highlight pre, 
 .language-console pre.highlight, .language-console .highlight pre  
 {
     background: #012456;
-    color: #d14;
+    color: #e50000;
 }
 
-.language-posh td.gutter.gl pre.lineno,
-.language-console td.gutter.gl pre.lineno
+.language-posh td.gutter.gl,
+.language-console td.gutter.gl
 {
     background: #003279;
     color: #FF0;
-}
-
-
-/* powershell highlight */
-pre.lineno {
-    background: #1a1b17;
-    width: auto;
-    border-radius: 3px 0px 0px 3px;
 }
 
 td.code pre
