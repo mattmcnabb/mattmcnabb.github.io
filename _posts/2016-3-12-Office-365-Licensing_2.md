@@ -26,8 +26,8 @@ but to do this in bulk we'll need to use PowerShell.
 ### Finding available service plans
 Each license sku in Office 365 contains one or more service plans that can be enabled to provision a service for a user. These service plans include things like Exchange, Sharepoint, Skype for Business, and even external services like Sway or Intune. In part 1 of this series we looked at the Office 365 for Education license - let's take a look at how to find the services that are available in that sku:
 
-``` console
-Get-MsolAccountSku | Where-Object AccountSkuId -like '*Woffpack_fac*' | Select-Object -ExpandProperty ServiceStatus
+```powershell
+PS> Get-MsolAccountSku | Where-Object AccountSkuId -like '*Woffpack_fac*' | Select-Object -ExpandProperty ServiceStatus
 
 ServicePlan            ProvisioningStatus
 -----------            ------------------
@@ -49,13 +49,13 @@ So we can see that the service plans available to assign from the Office 365 for
 * Sharepoint (*SHAREPOINTSTANDARD_EDU*; includes Onedrive for Business)
 * Exchange (*EXCHANGE_S_STANDARD*)
 
-> NOTE: Intune's status is marked as `PendingActivation` because my organization has not purchased that service.
+> NOTE: Intune's status is marked as *PendingActivation* because my organization has not purchased that service.
 
 ### Assign selected service plans
 Last time we licensed Honest Abe with all included service plans in the Office 365 for Education license, so this time we'll find someone else and assign only select service plans from the license.
 
-``` console
-PS C:\> Get-MsolUser -UnlicensedUsersOnly
+```powershell
+PS> Get-MsolUser -UnlicensedUsersOnly
 
 UserPrincipalName                DisplayName       isLicensed
 -----------------                -----------       ----------
@@ -66,8 +66,8 @@ Ronald.Reagan@whitehouse.gov     Ronald Reagan     False
 
 This time we'll pick Ronald Reagan, and we only want to give him Exchange and Sharepoint. To do this, we need to learn a new cmdlet - `New-MsolLicenseOptions`. We'll run this before running the Set-MsolUserLicense cmdlet in order to configure the settings we want to assign along with the license. Pay special attention to the `-DisablePlans` parameter of `New-MsolLicenseOptions`, as this is how we configure selected service plans. Repeat - **Enabled service plans are configured by setting those that we want to be disabled**. If this sounds a little backward to you, then you'd be right and it can be problematic, and we'll talk more about that in a later post.
 
-``` console
-PS C:\> New-MsolLicenseOptions -AccountSkuId whitehouse:STANDARDWOFFPACK_FACULTY -DisabledPlans SWAY, YAMMER_EDU, SHAREPOINTWAC_EDU, MCOSTANDARD
+```powershell
+PS> New-MsolLicenseOptions -AccountSkuId whitehouse:STANDARDWOFFPACK_FACULTY -DisabledPlans SWAY, YAMMER_EDU, SHAREPOINTWAC_EDU, MCOSTANDARD
 
 ExtensionData AccountSkuId                                         DisabledServicePlans
 ------------- ------------                                         --------------------
@@ -76,29 +76,12 @@ ExtensionData AccountSkuId                                         DisabledServi
 
 Here we can see that running this command outputs an object of type `Microsoft.Online.Administration.LicenseOption` which can passed to the `Set-MsolUserLicense` cmdlet. In order to do that, we'll need to save this object in a variable:
 
-{% highlight Powershell %}
-$Options = New-MsolLicenseOptions -AccountSkuId whitehouse:STANDARDWOFFPACK_FACULTY -DisabledPlans SWAY, YAMMER_EDU, SHAREPOINTWAC_EDU, MCOSTANDARD
-{% endhighlight %}
-
-Now we can set the license for Ronnie:
-
-{% highlight Powershell %}
-Set-MsolUserLicense -UserPrincipalName Ronald.Reagan@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY -LicenseOptions $Options
-{% endhighlight %}
+{% gist 76cb1021748534eb4b4437c739107c34 1.ps1 %}
 
 ### Assign selected service plans from multiple licenses
 We can assign multiple licenses at the same time and still enabled selected plans by doing the following:
 
-{% highlight Powershell %}
-$Options = New-MsolLicenseOptions -AccountSkuId whitehouse:STANDARDWOFFPACK_FACULTY -DisabledPlans SWAY, YAMMER_EDU, SHAREPOINTWAC_EDU, MCOSTANDARD
-$Options += New-MsolLicenseOptions -AccountSkuId whitehouse:OFFICESUBSCRIPTION_FACULTY -DisabledPlans ONEDRIVESTANDARD
-{% endhighlight %}
-
-Now we can set the licenses for Ronnie:
-
-{% highlight Powershell %}
-Set-MsolUserLicense -UserPrincipalName Ronald.Reagan@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY, whitehouse:OFFICESUBSCRIPTION_FACULTY -LicenseOptions $Options
-{% endhighlight %}
+{% gist 76cb1021748534eb4b4437c739107c34 2.ps1 %}
 
 ### Conclusion
 In this article I've shown you how to assign a license sku to an unlicensed user while enabling selected service plans. In part three of this four part series I'll show you how to modify the enabled service plans for a user who has already been licensed.

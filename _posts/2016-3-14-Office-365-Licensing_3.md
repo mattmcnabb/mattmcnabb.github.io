@@ -23,8 +23,8 @@ In the first two parts of this series I showed you how to find available license
 ### Finding currently assigned service plans
 The first step in modifying a user's license assignments is finding out what services they currently has been assigned. To do this, we use the `Get-MsolUser` cmdlet:
 
-``` console
-PS c:\> Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
+```powershell
+PS> Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
 
 UserPrincipalName            DisplayName    isLicensed
 -----------------            -----------    ----------
@@ -33,9 +33,9 @@ ronald.reagan@whitehouse.gov Ronald Reagan  True
 
 Ok, that doesn't give us much other than telling us that the user is licensed - let's try another approach:
 
-``` console
-PS c:\> $User = Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
-PS c:\> $User.Licenses
+```powershell
+PS> $User = Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
+PS> $User.Licenses
 
 ExtensionData          : System.Runtime.Serialization.ExtensionDataObject
 AccountSku             : Microsoft.Online.Administration.AccountSkuIdentifier
@@ -56,22 +56,13 @@ ServiceStatus          : {Microsoft.Online.Administration.ServiceStatus,
 
 That's progress, now we can see that the user has two licenses assigned, but we can't really see which service plans are enabled in each of those. The license objects returned are a bit complex and the properties are nested quite a bit, so we'll need to get a little script-y to get a view of this that makes sense:
 
-{% highlight PowerShell %}
-$User = Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
-
-$User.Licenses |
-    Select-Object -Property AccountSkuId,
-        @{
-            n='ServicePlans'
-            e={ ($_.ServiceStatus | Where-Object ProvisioningStatus -eq 'success').ServicePlan.ServiceName }
-        }
-{% endhighlight %}
+{% gist 78775a6f3bd7ec1e9fb3d294c5b9974f 1.ps1 %}
 
 > NOTE: If the syntax above is unfamiliar to you, check out the help for [Select-Object][Select], particularly the fourth example that details how to create a calculated property.
 
 If we run this in the console we should get something like this:
 
-``` console
+```powershell
 AccountSkuId                               ServicePlans
 ------------                               ------------
 whitehouse:OFFICESUBSCRIPTION_FACULTY   OFFICESUBSCRIPTION
@@ -84,19 +75,19 @@ Now we have it! We can now see that Ronnie has two licenses assigned and we can 
 
 We can see from the above example that Ronald has access to Office Pro Plus, Yammer, Exchange Online, Sharepoint and Onedrive, and Office Web Apps. Now let's say that he needs to have access to Skype for Business as well. From the previous post in this series we know that this service plan is called `MCOSTANDARD`. We'll use the `New-MsolLicenseOptions` cmdlet to set up the correct disabled plans:
 
-``` console
-PS c:\> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
+```powershell
+PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
 ```
 
 Now to actually modify the plan assignment we'll use the `Set-MsolUserLicense` cmdlet again, but with a key difference - since the user already has the license that contains plan assigned this time we don't use the `-AddLicenses` parameter:
 
-``` console
-PS c:\> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options
+```powershell
+PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options
 ```
 
 Now if we re-run the script above to return the user's assigned licenses and plans, we should see that Skype for Business is enabled:
 
-``` console
+```powershell
 AccountSkuId                               ServicePlans
 ------------                               ------------
 whitehouse:OFFICESUBSCRIPTION_FACULTY   OFFICESUBSCRIPTION
@@ -109,9 +100,9 @@ whitehouse:STANDARDWOFFPACK_FACULTY     {YAMMER_EDU, MCOSTANDARD, EXCHANGE_S_STA
 
 To take this a step further, let's try an advanced example: say for instance that the user needs to have one currently assigned license modified while simultaneously adding a new license. This is possible because the license options objects contain the Sku ID that tells the `Set-MsolUserLicense` cmdlet which license to apply the options to. So if we want to modify the `STANDARDWOFFPACK_FACULTY` license just like the previous example, but we also want to add a Power BI license for the user, we'd do it like this:
 
-``` console
-PS c:\> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
-S c:\> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options -AddLicenses 'whitehouse:POWER_BI_STANDARD_FACULTY'
+```powershell
+PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
+PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options -AddLicenses 'whitehouse:POWER_BI_STANDARD_FACULTY'
 ```
 
 ### Conclusion

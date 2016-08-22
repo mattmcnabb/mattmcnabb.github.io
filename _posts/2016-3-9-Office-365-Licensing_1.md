@@ -28,8 +28,8 @@ The first step to using PowerShell for Office 365 licensing is learning how to c
 
 Once all of these are installed, we can connect to Office 365 using this command:
 
-``` console
-PS c:\> Connect-MsolService
+```powershell
+PS> Connect-MsolService
 ```
 
 We'll be prompted for credentials here - enter the username and password for our admin user and follow the prompts to indicate whether this is a Microsoft account or a work or school account.
@@ -38,23 +38,15 @@ We'll be prompted for credentials here - enter the username and password for our
 
 We can also specify a credential at the command line by saving a credential object first:
 
-``` console
-PS c:\> $Credential = Get-Credential
-PS c:\> Connect-MsolService -Credential $Credential
+```powershell
+PS> $Credential = Get-Credential
+PS> Connect-MsolService -Credential $Credential
 ```
 
-> NOTE: Using the `-Credential` parameter will only work with a cloud account and not a federated account.
+This command will display all the available commands in the MSOnline module - 91 at the time of writing:
 
-Now we'll run the command:
-
-``` console
-PS c:\> Get-Command -Module MSOnline
-```
-
-This will display all the available commands in the MSOnline module - 91 at the time of writing.
-
-``` console
-PS C:\> Get-Command -Module MSOnline
+```powershell
+PS> Get-Command -Module MSOnline
 
 CommandType  Name                              Version  Source
 -----------  ----                              -------  ------
@@ -74,12 +66,8 @@ Cmdlet       Convert-MsolFederatedUser         1.0      MSOnline
 ### Assign a license sku
 Next we'll need to find an unlicensed user that we can provision Office 365 services for, and the appropriate license to add. To find a user, use the `Get-MsolUser` cmdlet:
 
-``` console
-PS c:\> Get-MsolUser -UnlicensedUsersOnly
-```
-
-``` console
-PS C:\> Get-MsolUser -UnlicensedUsersOnly
+```powershell
+PS> Get-MsolUser -UnlicensedUsersOnly
 
 UserPrincipalName                DisplayName       isLicensed
 -----------------                -----------       ----------
@@ -90,8 +78,8 @@ Ronald.Reagan@whitehouse.gov     Ronald Reagan     False
 
 Pick one of the users returned and copy the UserPrincipalName property. Next we'll find the license we want to assign using the `Get-MsolAccountSku` cmdlet:
 
-``` console
-PS C:\> Get-MsolAccountSku
+```powershell
+PS> Get-MsolAccountSku
 
 AccountSkuId                              ActiveUnits WarningUnits ConsumedUnits
 ------------                              ----------- ------------ -------------
@@ -108,8 +96,8 @@ whitehouse:STANDARDWOFFPACK_FACULTY       4901        0            1982
 
 What is returned by this cmdlet depends on what subscriptions you have purchased for your Office 365 tenant. The sku names are formulated using a combination of your tenant domain name and the license name. I work in public education, so our subscription contains faculty and student-focused skus. The one I'm looking for is `whitehouse:STANDARDWOFFPACK_FACULTY`, which is called "Office 365 for Education" in the Admin Center. Now to assign this license to the user I picked, I'll run this command:
 
-``` console
-PS c:\> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY
+```powershell
+PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY
 ```
 
 Of course, you'll need to use the relevant user name and sku name from your tenant or you'll probably be greeted with an error when you run this command.
@@ -120,14 +108,14 @@ This will add the license for this user and enable any service plans that are co
 
 Using Office apps on the web is great, but sometimes you just need the desktop applications to access the full feature set. In this case you'd want to add the previous license to a user and at the same time license him for Office Pro Plus so he can download and activate the Office suite right from his Office 365 account. Here's how that can be done:
 
-``` console
-PS c:\> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY, whitehouse:OFFICESUBSCRIPTION_FACULTY
+```powershell
+PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY, whitehouse:OFFICESUBSCRIPTION_FACULTY
 ```
 
 If our user already has the above license assigned and we need to tack on the Office Pro Plus subscription later, we can run this command:
 
-``` console
-PS c:\> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:OFFICESUBSCRIPTION_FACULTY
+```powershell
+PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:OFFICESUBSCRIPTION_FACULTY
 ```
 
 ### Conclusion

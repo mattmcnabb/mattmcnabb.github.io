@@ -30,55 +30,19 @@ When you license a user who is currently unlicensed you use the -AddLicenses par
 ### Solutions
 Let's start with problem 1. To approach this problem I started by imagining a data structure that would contain license configurations in a way that is native to PowerShell. I use hash tables for nearly everything, so it's no surprise that what I came up with utilizes them. Check out this example license template:
 
-{% highlight Powershell %}
-$LicenseTemplate = @(
-    @{
-        AccountSkuId = 'whitehouse:STANDARDWOFFPACK_FACULTY'
-        EnabledPlans = 'EXCHANGE_S_STANDARD','SHAREPOINTSTANDARD_EDU','SHAREPOINTWAC_EDU','MCOSTANDARD','YAMMER_EDU'
-    },
-
-    @{
-        AccountSkuId = 'whitehouse:OFFICESUBSCRIPTION_FACULTY'
-        EnabledPlans = 'OFFICESUBSCRIPTION'
-    }
-)
-{% endhighlight %}
+{% gist 046774cab99eecb091a458ea407f752b 1.ps1 %}
 
 This script snippet will create a new array of hashtables and save it in a variable called `LicenseTemplate`. Notice that our hash tables have a key called `EnabledPlans` rather than `DisabledPlans`.
 
 Next, we need a method to consume this license template. We can do that by looping through each hashtable, inverting the enabled plans to disabled plans, and then outputting an appropriate license options object:
 
-{% highlight Powershell %}
-$AccountSkuIds = Get-MsolAccountSku
-
-$LicenseOptions = foreach ($Item in $LicenseTemplate)
-{
-    $AllPlans = ($AccountSkuIds | Where-Object AccountSkuId -eq $Item.AccountSkuId).ServiceStatus
-    $DisabledPlans = ($AllPlans | Where-Object { $_.ServicePlan.ServiceName -notin $Item.EnabledPlans }).ServicePlan.ServiceName
-    New-MsolLicenseOptions -AccountSkuId $Item.AccountSkuId -DisabledPlans $DisabledPlans
-}
-{% endhighlight %}
+{% gist 046774cab99eecb091a458ea407f752b 2.ps1 %}
 
 That ought to do it! We can now prevent unexpected service plans from being added to our users.
 
 To solve problem 2, we need to employ a bit of error handling. Remember when I said that attempting to add a license to a user who already owns said license will result in an error? We're going to use that knowledge to create method for detecting whether the license is already added and if so, we'll just pass in options for the license. Check it out:
 
-{% highlight Powershell %}
-try
-{
-    $Splat = @{
-        UserPrincipalName = abe.lincoln@whitehouse.gov
-        AddLicenses       = whitehouse:STANDARDWOFFPACK_FACULTY
-        LicenseOptions    = $Options
-    }
-    Set-MsolUserLicense @Splat -ErrorAction Stop
-}
-catch [Microsoft.Online.Administration.Automation.MicrosoftOnlineException]
-{
-    $Splat.Remove('AddLicenses')
-    Set-MsolUserLicense @Splat -ErrorAction Stop
-}
-{% endhighlight %}
+{% gist 046774cab99eecb091a458ea407f752b 3.ps1 %}
 
 I'm using a try/catch construct here to capture these errors. This approach will attempt to assign the desired license with the preconfigured options to the user. If the license is already assigned we'll get an error of type `[Microsoft.Online.Administration.Automation.MicrosoftOnlineException]` and we'll retry by removing the `-AddLicenses` parameter.
 
@@ -87,33 +51,6 @@ Building on these approaches I've created the `Set-O365UserLicense` function tha
 ### Using Set-O365UserLicense
 Here's an example of how you might use the function to automate licensing for the ENTERPRISEPACK sku:
 
-{% highlight Powershell %}
-# Sales users will get Exchange and Skype
-# Engineers will get Exchange and Sharepoint
-
-$Sales = Get-MsolUser -Department Sales -All
-$Engineering = Get-MsolUser -Department Engineering -All
-
-$SalesTemplate = @{
-    AccountSkuId = "contoso:ENTERPRISEPACK"
-    EnabledPlans = "EXCHANGE_S_STANDARD","MCOSTANDARD"
-}
-
-$EngineeringTemplate = @(
-    @{
-        AccountSkuId = contoso:ENTERPRISEPACK
-        EnabledPlans = "EXCHANGE_S_STANDARD"
-    },
-
-    @{
-        AccountSkuId = "contoso:PROJECTONLINE_PLAN_1"
-        EnabledPlans = "SHAREPOINT_PROJECT_EDU","SHAREPOINTENTERPRISE_EDU"
-    }
-)
-
-$Sales | Set-O365UserLicense -LicenseTemplate $SalesTemplate
-$Engineering | Set-O365UserLicense -LicenseTemplate $EngineeringTemplate
-
-{% endhighlight %}
+{% gist 046774cab99eecb091a458ea407f752b 4.ps1 %}
 
 That's all for this blog series on Office 365 user licensing. This series was a challenge to write as I had been kicking these ideas around in my head for quite some time, but fully realizing them and committing them to paper took some effort! But I had fun and have already seen the benefit of this new approach in my own Office 365 licensing scripts. I hope you find this as useful as I have! Thanks for reading!
