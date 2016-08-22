@@ -7,14 +7,17 @@ comments: true
 ---
 
 [SGJuly]: http://powershell.org/wp/2015/07/04/2015-july-scripting-games-puzzle/
-[Challenge]: /assets/media/JulyScriptingChallenge.png "Scripting Games July 2015 Challenge"
 
 The Scripting Games are back for another year and the format has changed quite a bit. This year we'll be treated to several monthly puzzles with solutions submitted publicly on the Powershell.org website. July's puzzle can be found [here][SGJuly].
 
 ### The Challenge
 The goal is to create a Powershell one-liner that is as short as possible and creates the output given in the example:
 
-![][Challenge]
+```powershell
+PSComputerName ServicePackMajorVersion Version  BIOSSerial
+-------------- ----------------------- -------  ----------
+Win81                                0 6.3.9600 00261-80123-18417-AA816
+```
 
 In addition the solution should use one or fewer semicolons, should not use Foreach-Object, and should be able to target multiple computers.
 
@@ -22,7 +25,7 @@ In addition the solution should use one or fewer semicolons, should not use Fore
 Ok, so right off the bat, we can see that we need to use WMI to get our properties. WMI is realtively easy to access with Powershell using the Get-WmiObject or Get-CimInstance cmdlets. Two of the most common WMI classes you'll see used to get computer information are Win32_ComputerSystem and Win32_OperatingSystem. Let's try Win32_ComputerSystem first:
 
 ``` console
-PS c:\> Get-WmiObject -ClassName Win32_ComputerSystem | Get-Member
+PS> Get-WmiObject -ClassName Win32_ComputerSystem | Get-Member
 
    TypeName: System.Management.ManagementObject#root\cimv2\Win32_ComputerSystem
 
@@ -102,7 +105,7 @@ ConvertToDateTime           ScriptMethod  System.Object ConvertToDateTime();
 There's a ton of info there for sure, and I see that it contains the PSComputerName property we're looking for, but not much else. There are no serial number, service pack version, or OS version properties returned. So let's try Win32_OperatingSystem:
 
 ``` console
-Get-WmiObject -ClassName Win32_OperatingSystem | Get-Member
+PS> Get-WmiObject -ClassName Win32_OperatingSystem | Get-Member
 
    TypeName: System.Management.ManagementObject#root\cimv2\Win32_OperatingSystem
 
@@ -186,15 +189,15 @@ ConvertToDateTime                         ScriptMethod  System.Object ConvertToD
 
 That's more like it! This ouput all the properties we need to get the intended final output, so next we can put together a working command that outputs just what we need to the console. We can use Select-Object to pick the properties we want out of all those returned:
 
-{% highlight Powershell %}
-Get-WmiObject -ClassName Win32_OperatingSystem | Select-Object -Property PSComputerName, ServicePackMajorVersion, Version, SerialNumber
-{% endhighlight %}
+```powershell
+PS> Get-WmiObject -ClassName Win32_OperatingSystem | Select-Object -Property PSComputerName, ServicePackMajorVersion, Version, SerialNumber
+```
 
 The above command gets us close to the output we need, but there's a problem. The example output wants a property called 'BIOSSerial,' but we're outputting a property called 'SerialNumber.' Luckily, Select-Object can handle this neatly using a technique called a [calculated property](https://technet.microsoft.com/en-us/library/ff730948.aspx):
 
-{% highlight Powershell %}
-Get-WmiObject -ClassName Win32_OperatingSystem | Select-Object -Property PSComputerName, ServicePackMajorVersion, Version, @{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> Get-WmiObject -ClassName Win32_OperatingSystem | Select-Object -Property PSComputerName, ServicePackMajorVersion, Version, @{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 The Select-Object command above has customized our output by replacing the 'SerialNumber' property name with 'BIOSSerial.' Now we have the output we need, but the goal is to make it as short as possible. Can we make this one-liner shorter than it already is? Sure can!
 
@@ -202,46 +205,52 @@ The Select-Object command above has customized our output by replacing the 'Seri
 
 We can make this one-liner shorter with a few different techniques - positional parameters, cmdlet aliases, wildcards, and removing whitespace. Positional parameters are cmdlet parameters that can be passed a value implicitly. With Get-WmiObject we can pass a value to the -ClassName parameter and omit the actual parameter name from the command. We can do the same with the -Property parameter of Select-Object's -Property parameter:
 
-{% highlight Powershell %}
-Get-WmiObject Win32_OperatingSystem | Select-Object PSComputerName, ServicePackMajorVersion, Version, @{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> Get-WmiObject Win32_OperatingSystem | Select-Object PSComputerName, ServicePackMajorVersion, Version, @{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 Now we can make it even shorter by using cmdlet aliases. Get-WmiObject has the alias gwmi, and Select-Object can be shortened to just Select:
 
-{% highlight Powershell %}
-gwmi Win32_OperatingSystem | select PSComputerName, ServicePackMajorVersion, Version, @{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> gwmi Win32_OperatingSystem | select PSComputerName, ServicePackMajorVersion, Version, @{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 Now we can shorten the property names passed to Select-Object using wildcards. We have to consider this carefully to make sure we use the minimum number of characters that are required to ensure the property name is not ambiguous:
 
-{% highlight Powershell %}
-gwmi Win32_OperatingSystem | select PSC*, *j*, V*, @{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> gwmi Win32_OperatingSystem | select PSC*, *j*, V*, @{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 And then we'll remove the whitespace from before and after the pipe character, and between the property names in the Select-Object statement:
 
-{% highlight Powershell %}
-gwmi Win32_OperatingSystem|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> gwmi Win32_OperatingSystem|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 There's still one more little trick to save a few characters. The Win32_OperatingSystem has a cousin - CIM_OperatingSystem. We can get the same properties from this class and save two characters from our final solution:
 
-{% highlight Powershell %}
-gwmi CIM_OperatingSystem|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> gwmi CIM_OperatingSystem|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 Whew! We now have all the output that we need in a short (-ish) command. It only uses one semicolon and does not use Foreach-Object. But there's one goal that we haven't approached yet - the final solution should support targeting multiple computers. Hold on a second, it already supports multiple computers! The Get-WmiObject cmdlet's -ComputerName parameter accepts multiple values:
 
-{% highlight Powershell %}
--ComputerName <String[]>;
-{% endhighlight %}
+```powershell
+PS> Get-Help Get-WmiObject -Parameter ComputerName
+-ComputerName [<String[]>]
+Specifies the target computer for the management operation. Enter a...
+```
 
 So we can run this against multiple computers by passing them in using an array, and we can keep it short using the parameter's alias, -cn:
 
-{% highlight Powershell %}
-gwmi Cim_OperatingSystem -cn pc1,pc2|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
-{% endhighlight %}
+```powershell
+PS> gwmi Cim_OperatingSystem -cn pc1,pc2|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
-But we're not going to include the -ComputerName parameter in the final solution. The goals state that the solution should support multiple computers, but does not state that those have to be included in the end result. Nit-picky? Yes. Technically correct? Maybe.
+But we're not going to include the -ComputerName parameter in the final solution. The goals state that the solution should support multiple computers, but does not state that those have to be included in the end result. Nit-picky? Yes. Technically correct? Maybe. Here is my final command string in all its' glory (81 characters!):
+
+```powershell
+PS> gwmi Cim_OperatingSystem|select PSC*,*j*,V*,@{n='BIOSSerial';e={$_.SerialNumber}}
+```
 
 My solution is one possible approach and I can't guarantee that it is the best or even the shortest. There are some smart folks out there in the community who often come up with some very unique approaches to problems. The goal of this article was to detail my approach and give the reasoning behind how I arrived at an answer. Thanks for reading!

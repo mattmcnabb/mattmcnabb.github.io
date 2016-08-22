@@ -20,31 +20,31 @@ This module uses the Office 365 Service Communications REST API and you'll need 
 
 To get started with the O365ServiceCommunications module, you'll first need to install the module. If you have Powershell version 5.0 or have updated version 4.0 with the latest bits you can install the module using PowerShellGet by running this command:
 
-{% highlight console %}
-Find-Module O365ServiceCommunications | Install-Module
-{% endhighlight %}
+```powershell
+PS> Find-Module O365ServiceCommunications | Install-Module
+```
 
 If you don't have PowerShellGet you can install the module by downloading directly from the [Github project site][Github]. Click on "Download ZIP" and then once the download has completed, right click the ZIP file and select "Unblock." Now extract the contents of the ZIP archive to a directory in your PowerShell module path (e.g. %Program Files%\WindowsPowerShell\Modules).
 
 Once the module is installed, you can make it's commands available like this:
 
-{% highlight console %}
-Import-Module O365ServiceCommunications
-{% endhighlight %}
+```powershell
+PS> Import-Module O365ServiceCommunications
+```
 
 ### Authenticating
 
 Before you can retrieve events from your tenant, you'll need to sign in to the REST API. Create a credential object first:
 
-{% highlight console %}
-$MyCred = Get-Credential
-{% endhighlight %}
+```powershell
+PS> $MyCred = Get-Credential
+```
 
 And then pass that credential to the New-SCSession command:
 
-{% highlight console %}
-$MySession = New-SCSession -Credential $MyCred
-{% endhighlight %}
+```powershell
+PS> $MySession = New-SCSession -Credential $MyCred
+```
 
 Notice that I assigned the output of the New-SCSession command to the $MySession variable - you'll use this later when you make subsequent calls to the API to retrieve service events.
 
@@ -52,14 +52,14 @@ Notice that I assigned the output of the New-SCSession command to the $MySession
 
 The next command you'll want to take a look at is Get-SCServiceInfo. This command will return information about the services that are available in your tenant - in other words, things that may have service incidents or maintenance messages.
 
-{% highlight console %}
-Get-SCServiceInfo -SCSession $MySession
-{% endhighlight %}
+```powershell
+PS> Get-SCServiceInfo -SCSession $MySession
+```
 
 Here you can see that the $MySession variable is passed in to the command. This sends along your authentication token to grant you access to the retrieve information from the REST API. Depending on the subscriptions you've purchased you'll see something like this:
 
-{% highlight console %}
-PS C:\> Get-SCServiceInfo -SCSession $MySession
+```powershell
+PS> Get-SCServiceInfo -SCSession $MySession
 
 ServiceName              FeatureNames
 -----------              ------------
@@ -75,20 +75,20 @@ Mobile Device Management {Mobile Device Management}
 Planner                  {Planner}
 Sway                     {Sway}
 Power BI                 {PowerBI.com}
-{% endhighlight %}
+```
 
 ### Getting events
 
 Get-SCEvent is the real meat and potatoes of the O365ServiceCommunications module. It retrieves information for service incidents, maintenance announcements, and plain old messages about things like new features or items of concern for supporting your tenant. These are the same messages that you can see by going to the Message Center in your Office 365 administrative portal. You can run this just like the previous command - just pass in the session object:
 
-{% highlight console %}
-Get-SCEvent -SCSession $MySession
-{% endhighlight %}
+```powershell
+PS> Get-SCEvent -SCSession $MySession
+```
 
 By default this will return only information about incidents:
 
-{% highlight console %}
-PS C:\> Get-SCEvent -SCSession $SCSession
+```powershell
+PS> Get-SCEvent -SCSession $SCSession
 
 StartTime             EndTime               ID      EventType Service           Status
 ---------             -------               --      --------- -------           ------
@@ -97,7 +97,7 @@ StartTime             EndTime               ID      EventType Service           
 3/11/2016 7:00:00 AM  3/11/2016 8:10:00 AM  EX44123 Incident  Exchange Online   Service restored
 3/10/2016 9:59:00 PM  3/10/2016 10:19:00 PM YA44110 Incident  Yammer Enterprise Service restored
 3/10/2016 11:18:00 PM 3/10/2016 11:30:00 PM YA44111 Incident  Yammer Enterprise Service restored
-{% endhighlight %}
+```
 
 To get other event types you can specify the -EventTypes parameter. This takes one or more of three arguments: Incident, Maintenance, and Message.
 
