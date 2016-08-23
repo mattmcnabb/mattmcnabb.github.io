@@ -22,7 +22,7 @@ In this profile script I configure most of the settings that will apply to both 
 
 Let's walk through this bit-by-bit. The first two lines import credential objects that I have previously saved using the New-SavedCredential function and saves them in variables. This saves the username and password securely in an XML file that represents a Powershell credential object. I typically run powershell with a standard user account and use these credentials in commands that require more privilege. I save the credentials in SAM and UPN formats - SAM format is for things like domain servers and Active Directory, and the UPN credentials can be used against web services like Office 365.
 
-{% gist 57aff66df11c7e97c3fb10db552d3730 2.ps1}
+{% gist 57aff66df11c7e97c3fb10db552d3730 2.ps1 %}
 
 Next I extend the Powershell module path to include my script library; this adds quick access to modules stored in OneDrive. I also remove my local documents modules folder from the modulepath variable. I do this because I often work over a VPN connection and my documents are stored on a file server in our datacenter. This can mean that automatic module enumeration is very slow over the WAN connection. This cripples tab-completion and Intellisense because it constantly checks your module path to discover commands and parameters.
 
