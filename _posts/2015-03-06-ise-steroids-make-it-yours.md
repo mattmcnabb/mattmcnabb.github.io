@@ -20,16 +20,7 @@ Make it Yours is a set of features that allow you to add custom commands to cont
 ###  Add a Right-Click Menu Entry
 To create a context menu entry, use Add-SteroidsContextMenuCommand. These context menu commands are dynamic, so you can specify which token types they are available for. To demonstrate, let's create a menu entry that will find details about the module that a given command belongs to:
 
-{% highlight Powershell %}
-$SB = {
-    $Command = Get-Command -Name $args[1]
-    Get-Module -Name $Command.ModuleName |
-    Format-List Name, Description, Version, PowerShellHostName,
-                PowerShellVersion, Author, CompanyName
-}
-
-Add-SteroidsContextMenuCommand -DisplayName 'Get Parent Module' -TokenType Command -ScriptBlock $SB
-{% endhighlight %}
+{% gist fa25dedb8ed23a3b8b79c0c23c480fde 1.ps1 %}
 
 Notice that in the script block that we define we use `$args[1]` to refer to the command name. Add-SteroidsContextMenuCommand's -ScriptBlock parameter receives two arguments in the `$args` array - `$args[0]` is the editor that was clicked and `$args[1]` is the token.
 
@@ -44,9 +35,7 @@ Selecting Get Parent Module gives us this output:
 ### Adding a Tools Menu Item
 Ok, this one is pretty cool! We can now add application shortcuts directly into the ISE Tools menu for quick access to tools we use frequently. I use WMI quite often, and the WMI Test utility is useful for composing WMI queries and discovering classes in a graphical interface. Let's add it to our Tools menu so we can quickly pull it up without leaving the ISE:
 
-{% highlight Powershell %}
-Add-SteroidsTool -DisplayName 'WMI Tester' -Path wbemtest.exe -ToolTip 'Explore WMI classes and compose queries'
-{% endhighlight %}
+{% gist fa25dedb8ed23a3b8b79c0c23c480fde 2.ps1 %}
 
 Running the above code will add the WMI Test tool to the Tools menu in the menu bar at the top of the ISE GUI:
 
@@ -59,28 +48,11 @@ Here is the WMI Tester in action
 ### Adding a New Add-On Menu Item
 The PowerShell ISE allows you to programmatically create add-ons that run any arbitrary script code that you would like. Although ISE Steroids automates nearly everything you can imagine for your script development needs, you may want to add your own automations to the ISE. In the top menu bar, click on MyCommands and then Add New Command. A new template script will be launched in the editor pane with example code to create a new command:
 
-{% highlight Powershell %}
-# this line will add a new custom command with the keyboard shortcut ALT+T:
-$psise.CurrentPowerShellTab.AddOnsMenu.Submenus.Add('Start Regedit', { regedit.exe }, 'ALT+T')
-
-# this line will add a new custom command without a keyboard shortcut:
-$psise.CurrentPowerShellTab.AddOnsMenu.Submenus.Add('Get Script Path', { $psise.CurrentFile.FullPath }, $null)
-
-# these lines will first add a submenu, then add commands to it:
-$parent = $psise.CurrentPowerShellTab.AddOnsMenu.SubMenus.Add('My Tools', $null, $null)
-$parent.Submenus.Add('Close All Editors', { $psise.CurrentPowerShellTab.Files.Clear() }, 'ALT+X' )
-$parent.Submenus.Add('Open powertheshell.com', { Start-Process www.powertheshell.com }, 'ALT+P' )
-
-# all commands will be defined once you run this script
-# to define commands permanently, place this code into your profile script
-# the path to the profile script can be found in $profile. You may have to create the file and subfolder first.
-{% endhighlight %}
+{% gist fa25dedb8ed23a3b8b79c0c23c480fde 3.ps1 %}
 
 Here I will create an add-on item that removes trailing blank spaces from the end of all lines in the currently selected script:
 
-{% highlight Powershell %}
-$null = $psise.CurrentPowerShellTab.AddOnsMenu.Submenus.Add('Remove Trailing Blanks', {Remove-TrailingBlanks},$null)
-{% endhighlight %}
+{% gist fa25dedb8ed23a3b8b79c0c23c480fde 4.ps1 %}
 
 Which gives us a new command item in the MyCommands menu:
 

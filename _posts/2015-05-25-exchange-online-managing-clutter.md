@@ -24,7 +24,7 @@ First, some prerequisites:
 
 2. The Clutter cmdlets will only work on server version 15.1 (Build 166.22). To manage Clutter with Powershell, both the server that you connect to via Powershell and the server that the mailboxes you are managing must be updated to this version. Microsoft is working to make sure that all Exchange Online servers are updated as quickly as possible, but you may still have some mailboxes that are on a prior version. If this is the case you will get an error when targeting those mailboxes with the Clutter cmdlets:
 
-``` consoleerror
+```console
 Error on proxy command 'Get-Clutter -Identity:'user@domainname.onmicrosoft.com,OU=Microsoft Exchange Hosted Organizations,DC=NAMPR123h050,DC=prod,DC=outlook,DC=com'' to
 server servname.namprd77.prod.outlook.com: Server version 15.01.0154.0000, Proxy method PSWS:
 Cmdlet error with following error message:
@@ -37,34 +37,25 @@ System.Management.Automation.parentContainsErrorRecordException: The term 'Get-c
 ### Turning Clutter Off
 There is currently no way to disable Clutter from being on by default for your entire tenant - you will have to do this for all your mailboxes now and for any new mailboxes that you don't want to have Clutter turned on for.  You can disable Clutter manually for a mailbox by running the `Set-Clutter` cmdlet:
 
-{% highlight Powershell %}
-Get-Mailbox 'Abe Lincoln' | Set-Clutter -Enable $false
-{% endhighlight %}
+```powershell
+PS> Get-Mailbox 'Abe Lincoln' | Set-Clutter -Enable $false
+```
 
 Or you can disable it for all mailboxes:
 
-{% highlight Powershell %}
-Get-Mailbox -Filter * -ResultSize Unlimited | Set-Clutter -Enable $false
-{% endhighlight %}
+```powershell
+PS> Get-Mailbox -Filter * -ResultSize Unlimited | Set-Clutter -Enable $false
+```
 
 However, some of your users may have already enabled Clutter and you won't want to disable it for them. In this case you will want to filter your mailbox results to only the mailboxes that don't already have Clutter enabled:
 
-{% highlight Powershell %}
-Get-Mailbox -Filter * -ResultSize Unlimited | Foreach {
-    $DN = $_.DistinguishedName
-    $Status = Get-Clutter -Identity $DN | Select -ExpandProperty isEnabled
-    if (!$Status)
-    {
-        Set-Clutter -Identity $DN -Enable $false
-    }
-}
-{% endhighlight %}
+{% gist bbe0f0d02439e6affb240d594dc3642a 1.ps1 %}
 
 You can fully automate disabling Clutter for your current mailboxes using [this script] [Technet]. Make sure you unblock the script and then run:
 
-{% highlight Powershell %}
-Get-Help .\DisableClutterOnByDefault.ps1 -ShowWindow
-{% endhighlight %}
+```powershell
+PS> Get-Help .\DisableClutterOnByDefault.ps1 -ShowWindow
+```
 
 for details on how to use the script.
 

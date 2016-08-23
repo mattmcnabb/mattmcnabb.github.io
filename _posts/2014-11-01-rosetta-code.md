@@ -37,17 +37,7 @@ _**Task Description:**_
 
 To solve the first two steps of the task, I wrote a function called Get-Hailstone:
 
-{% highlight powershell %}
-function Get-HailStone {
-  param($n)
-  switch($n) {
-    {$_ -lt 1}     {return}
-    1              {$n; return}
-    {$n % 2 -eq 0} {$n; return Get-Hailstone ($n = $n / 2)}
-    {$n % 2 -ne 0} {$n; return Get-Hailstone ($n = ($n * 3) +1)}
-  }
-}
-{% endhighlight %}
+{% gist 432fd78dca1f54d173cfb301ad283c07 1.ps1 %}
 
 This fairly concise piece of code uses a switch statement to implement a recursive Hailstone algorithm. Wikipedia defines recursion as "*a method where the solution to a problem depends on solutions to smaller instances of the same problem*" - in other words, a block of code that uses itself to define itself. You can see this in practice in Get-Hailstone which calls Get-Hailstone inside it's function body.
 
@@ -59,8 +49,8 @@ The third and fourth conditions are 'recursive cases' and decide how to modify 
 
 Get-Hailstone is quick! On my laptop it can calculate the hailstone sequence for a 50-digit number in less than 200 milliseconds.
 
-``` console
-PS c:\> Measure-Command {Get-HailStone -n 19287549016253467837652413987654200198276352456276}
+```powershell
+PS> Measure-Command {Get-HailStone -n 19287549016253467837652413987654200198276352456276}
 
 Days              : 0
 Hours             : 0

@@ -35,25 +35,7 @@ Digging a bit deeper we can get an idea how this is accomplished and how to crea
 
 Theme files for ISE Steroids are XML and are similar to native theme files for the ISE, but are much friendlier to read. Tokens are now explicitly named and you can easily see what everything does. Steroids themes are given the file extension 'ISESteroidsThemeXML' whereas traditional ISE themes are 'StorableColorTheme.ps1xml.'
 
-{% highlight XML %}
-<?xml version="1.0"?>
-<ColorOptions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ShareFontForConsole>false</ShareFontForConsole>
-  <ScriptPaneFontFamily FontFamilyName="Lucida Console" />
-  <ScriptPaneFontSize>9</ScriptPaneFontSize>
-  <ConsolePaneFontFamily FontFamilyName="OCR A" />
-  <ConsolePaneFontSize>9</ConsolePaneFontSize>
-  <ConsolePaneForegroundColor ColorARGB="#8BF5F5F5" />
-  <ConsolePaneBackgroundColor ColorARGB="#FF012456" />
-  <ConsolePaneErrorForegroundColor ColorARGB="#FFFF0000" />
-  <ConsolePaneErrorBackgroundColor ColorARGB="#00FFFFFF" />
-  <ConsolePaneWarningForegroundColor ColorARGB="#FFFF8C00" />
-  <ConsolePaneWarningBackgroundColor ColorARGB="#00FFFFFF" />
-  <ConsolePaneVerboseForegroundColor ColorARGB="#FF00FFFF" />
-  <ConsolePaneVerboseBackgroundColor ColorARGB="#00FFFFFF" />
-  <ScriptPaneBackgroundColor ColorARGB="#FF012456" />
-  <CapitalizeMainMenuHeaders>true</CapitalizeMainMenuHeaders>
-{% endhighlight %}
+{% gist 7b5264664ac234e010cd86f577c10562 1.xml %}
 
 While there is no menu for custom creating a theme the way you would in the ISE natively, there is really no need since you can simply change your colors on the fly using the context menu and then when you are happy with the results you can save the new theme to your appdata folder.
 
