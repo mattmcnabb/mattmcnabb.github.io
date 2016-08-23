@@ -56,8 +56,6 @@ Lastly, if the current Powershell host is the ISE editor, I import a module call
 
 The ISEConfig script above also calls another profile script - load-addons.ps1. This script uses some of the functions in my ISELibrary module to create ISE add-ons. These add-ons take advantage of the extensibility of the ISE object model and allow you to create ISE menu items that run Powershell code and can be called with a keyboard shortcut.
 
-{% highlight Powershell %}
-
 {% gist 57aff66df11c7e97c3fb10db552d3730 11.ps1 %}
 
 Well, that's my Powershell profile! I hope this wasn't too long-winded but instead illustrates how flexible and dynamic Powershell profiles can be.
