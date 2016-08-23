@@ -36,7 +36,7 @@ So to make this work for you there are only two things you need to do on each co
 1. Configure OneDrive - If you are on Windows 7 this means downloading and installing OneDrive. On Windows 8.1 you just need to sign in and set up a folder to store your profile scripts.
 2. Create a simple Powershell profile in one of the default locations. The one I use is located in my Documents folder at .\WindowsPowershell\profile.ps1. Here is all the code I use in that file:
 
-{% gist b09fe0251e5e0bd89fc62be58cdd769a 1.ps1}
+{% gist b09fe0251e5e0bd89fc62be58cdd769a 1.ps1 %}
 
 This creates a variable with the path to my OneDrive scripts library and then 'dot-sources' my primary profile script from that library. The first line is not absolutely necessary, but I like to have my scripts library easily accessible from the command line and keeping this in a variable does that.
 
