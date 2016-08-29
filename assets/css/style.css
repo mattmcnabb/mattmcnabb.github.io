@@ -1,6 +1,9 @@
+@import 'https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:300,400';
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
 code
 {
-	font-family: "Source Code Pro","Consolas","Monaco","monospace";
+	font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
     background: #f0f2f1;
     color: #00529b;
     padding: 1px 5px;
@@ -30,21 +33,24 @@ blockquote p
 	display: inline;
 }
 
-h1, h2, h3, h4, h5, h6
+h1, h2, h3, h4, h5
 {
-	font-family: wf_segoe-ui_light,wf_segoe-ui_semilight,wf_segoe-ui_normal,HelveticaNeue-Thin,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,sans-serif;
+	font-family: "Roboto Slab", serif;
+	font-weight: 200;
 }
+
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.4em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1em; }
 
 body
 {
-	font-family: wf_segoe-ui_normal,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
-	font-size: 16px;
-	line-height: 1.6;
-}
-/* end customizations */
-
-body{
-	color: #2c3e50;
+	font-family: "Raleway", sans-serif;
+	font-size: 1em;
+	line-height: 1.7em;
+	color: #666666;
 	font-size: 16px;
 }
 
@@ -53,7 +59,6 @@ body{
 	position: fixed;
 	top: 0px;
 	padding-top: 10%;
-	/*background-color: #2c3e50;*/
 	background-color: #012456;
 	color: #f5f5f5;
 }
@@ -63,6 +68,8 @@ body{
 	margin-bottom: 10px;
 }
 .sidebar-header .title{
+	font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
+	font-size: 24px;
 	letter-spacing: 3px;
 	text-transform: uppercase;
 }
@@ -83,8 +90,8 @@ a.nav-link i{
 a.nav-link:hover { color: #777; }
 
 #bio {
-	font-family: "Courier New", Courier, monospace;
-	font-size: 11px;
+	font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
+	font-size: 14px;
 	margin: 0 auto;
 	margin-bottom: 10px;
 }
@@ -128,8 +135,7 @@ article .share .gplus:hover {
 }
 
 .page-header {
-	color: #e74c3c;
-	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+	color: #012456;
 }
 
 @media only screen and (min-width: 768px) {
@@ -161,14 +167,13 @@ article.home div a, article.home pre a { color: #2c3e50; }
 article.home div a:hover, article.home pre a:hover { color: #2c3e50; text-decoration: none; }
 article img { max-width: 100%; }
 
-h1,h2,h3,h4,h5,h6 { font-family: 'Source Sans Pro', sans-serif; }
 article.home h1,
 article.home h2,
 article.home h3,
 article.home h4,
 article.home h5,
 article.home h6 {
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Raleway', sans-serif;
 	color: #f2756a;
 }
 
@@ -176,7 +181,7 @@ article.home h1 a,
 article.home h2 a,
 article.home h3 a,
 article.home h4 a {
-	color: #f2756a;
+	color: #012456;
 }
 article.home h1 a:hover,
 article.home h2 a:hover,
@@ -192,7 +197,7 @@ article.home h4 a:hover {
 
 footer {
 	padding-top: 15px;
-	font-family: 'Source Sans Pro';
+	font-family: 'Raleway', sans-serif;
 }
 
 /* nav-vertical-tabs component */
@@ -234,4 +239,3 @@ footer {
 ul.dropdown-menu>li>a>i.fa {
     width: 1.3em;
 }
-
