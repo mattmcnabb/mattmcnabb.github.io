@@ -30,9 +30,3 @@ exclude: ["README.md","jekyll-metadata"]
 gems:
   - jekyll-paginate
   - jekyll-gist
-
-  #defaults:
-#    scope:
-#      path: ""
-#    values:
-#      title: PowerShell Escape
