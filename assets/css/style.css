@@ -1,16 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:300,400';
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
-code
-{
-	font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
-    background: #f0f2f1;
-    color: #00529b;
-    padding: 1px 5px;
-    border-radius: 3px;
-    border: 1px solid #b4d8ff;
-}
-
 blockquote
 {
 	background: #f9f9f9;

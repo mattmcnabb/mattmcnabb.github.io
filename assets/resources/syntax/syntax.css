@@ -3,12 +3,13 @@ pre.highlight,
 {
     background-color: #012456;
     color: #f5f5f5;
-    font-family: "Source Code Pro","Consolas","monospace";
+    font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
+    overflow-x: scroll;
 }
 
 /* console highlight */
-.language-posh pre.highlight, .language-posh .highlight pre, 
-.language-console pre.highlight, .language-console .highlight pre  
+.language-posh pre.highlight, .language-posh .highlight pre,
+.language-console pre.highlight, .language-console .highlight pre
 {
     background: #012456;
     color: #e50000;
