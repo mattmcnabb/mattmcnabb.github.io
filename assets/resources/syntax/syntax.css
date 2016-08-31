@@ -8,7 +8,9 @@ pre.highlight,
 }
 
 code		
-{	
+{
+    font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
+    background: #f0f2f1;	
     color: #00529b;		
     padding: 1px 5px;		
     border-radius: 3px;		
