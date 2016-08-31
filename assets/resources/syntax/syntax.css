@@ -5,10 +5,11 @@ pre.highlight,
     color: #f5f5f5;
     font-family: "Source Code Pro","Consolas","Menlo","Monaco","Bitstream Vera Sans Mono","monospace";
     overflow-x: auto;
-    white-space: pre;
+    
 }
 
-/* console highlight */
+pre code {white-space: pre;}
+
 .language-posh pre.highlight, .language-posh .highlight pre,
 .language-console pre.highlight, .language-console .highlight pre
 {
