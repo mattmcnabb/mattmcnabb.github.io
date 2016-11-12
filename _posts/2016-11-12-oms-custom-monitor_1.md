@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Creating a Custom Monitoring Solution with Microsoft Operations Management Suite - Part 1
-date: 2016-10-30
+date: 2016-11-12
 categories: [Powershell, OneLogin, OMS]
 author: Matt McNabb
 comments: true
@@ -10,8 +10,6 @@ comments: true
 [OneLoginPSGallery]: https://www.powershellgallery.com/packages/OneLogin/
 [OMSDataCollector]: https://azure.microsoft.com/en-us/documentation/articles/log-analytics-data-collector-api/
 [OMSDataInjection]: https://www.powershellgallery.com/packages/OMSDataInjection/
-
-## Part 1
 
 ## Homebrew logging
 
