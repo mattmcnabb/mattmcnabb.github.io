@@ -21,9 +21,7 @@ My organization has been using OneLogin for quite some time now and it's a great
 
 To install the OneLogin PowerShell module from the PowerShell Gallery, run:
 
-```powershellgallery
-Install-Module OneLogin
-```
+{% gist 1e8585b12c7b0ef8b27fc6949ceb6bbd 3.ps1 %}
 
 This module can be used to automate actions in your OneLogin account, such as creating users, adding roles, attributes, and most importantly for this article, retrieving events. OneLogin records an event for just about every action that takes place - logins, administrative actions, directory connector actions, etc. You can use these events to gain insight into your account and see how your users are taking advantage of applications, when something is going wrong, and potentially even detect risky activity. Here is some example code that will gather OneLogin events from the past hour:
 
@@ -35,9 +33,7 @@ I knew that I wanted to record and analyze OneLogin events in OMS, but was unsur
 
 So I set out creating a module for the OMS Data Collector API so that once I had figured out how to post this data, I could potentially reuse this approach with other types of data. No sooner had I begun to work on this module than I found out that Tao Yang had already done my work for me and published the excellent [OMSDataInjection module][OMSDataInjection]! 
 
-```powershell
-Install-Module OMSDataInjection
-```
+{% gist 1e8585b12c7b0ef8b27fc6949ceb6bbd 4.ps1 %}
 
 And here's a sample script that will post all the OneLogin events gathered for the past hour and post them to OMS:
 
