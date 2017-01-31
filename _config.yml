@@ -30,3 +30,4 @@ exclude: ["README.md","jekyll-metadata"]
 gems:
   - jekyll-paginate
   - jekyll-gist
+  - jekyll-redirect-from
