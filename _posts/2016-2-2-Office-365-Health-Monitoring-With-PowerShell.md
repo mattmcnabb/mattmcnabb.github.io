@@ -5,6 +5,8 @@ date: 2016-2-2
 categories: [Powershell, Office 365]
 author: Matt McNabb
 comments: true
+redirect_from:
+    - /2016/Office-365-Health-Monitoring-With-PowerShell/
 ---
 
 [Github]: http://github.com/mattmcnabb/O365ServiceCommunications
