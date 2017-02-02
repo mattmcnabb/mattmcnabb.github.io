@@ -23,19 +23,19 @@ PowerShell, however, revels in being general purpose. Its' primary strenth is co
 
 PowerShell was the great equalizer in the Windows administration world and enables all manner of complex automation, but with consistent, repeatable behavior. At its' best it abstracts the details of varied technologies away so that you can focus on the higher level needs of the task at hand. That's why I have such a problem with DSLs. To me they feel like a return to the old way of doing things, where automation in every technology had its' own learning curve. Even the normally sane and rational Kirk Munro has jumped on the DSL bandwagon and is now an open advocate for DSLs in PowerShell, going so far as to give a [talk][Youtube] about them at last year's PowerShell Summit. This is alarming and gives me nightmares of wading through context-based help menus:
 
-```console
+```powershell
 netsh /?
 ```
 
 Ok.
 
-```console
+```powershell
 netsh firewall /?
 ```
 
 Crap!
 
-```console
+```powershell
 netsh advfirewall /?
 ```
 
