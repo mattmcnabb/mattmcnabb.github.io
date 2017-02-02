@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Creating a Custom Monitoring Solution with Microsoft Operations Management Suite - Part 1
-date: 2016-11-12
 categories: [Powershell, OneLogin, OMS]
 author: Matt McNabb
 comments: true

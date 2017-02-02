@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Office 365 Health Monitoring with PowerShell
-date: 2016-2-2
 categories: [Powershell, Office 365]
 author: Matt McNabb
 comments: true
