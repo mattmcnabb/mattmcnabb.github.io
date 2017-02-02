@@ -10,8 +10,6 @@ comments: true
 [OMSDataCollector]: https://azure.microsoft.com/en-us/documentation/articles/log-analytics-data-collector-api/
 [OMSDataInjection]: https://www.powershellgallery.com/packages/OMSDataInjection/
 
-### Homebrew logging
-
 My organization has been using OneLogin for quite some time now and it's a great web identity management platform. Recently I've been tasked with figuring out how to gain better visibility into our OneLogin account for security and troubleshooting. To this end I created the [OneLogin PowerShell module][OneLoginPSGallery] that works against OneLogin's REST API. Using this module I can get retrieve event logs from the OneLogin service which is a great start, but to really take advantage of this power I needed a way to track and analyze the events. A SIEM product is a natural fit for this, and we just happen to be evaluating Microsoft's Operations Management Suite (OMS), particularly the Log Analytics feature. In this series I'll show you how I achieved our goal using PowerShell and OMS.
 
 ### The OneLogin PowerShell module
