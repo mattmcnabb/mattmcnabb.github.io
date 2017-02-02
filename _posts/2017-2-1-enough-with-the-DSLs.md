@@ -11,7 +11,7 @@ comments: true
 [Youtube]: https://www.youtube.com/watch?v=sefYvIFbG5M
 [Shovel]: /assets/media/Shovel.gif?raw=true
 
-![][Shovel]
+![](https://github.com/mattmcnabb/mattmcnabb.github.io/blob/master/assets/media/shovel.gif?raw=true)
 
 DSLs seem to be all the rage right now in the PowerShell world. Pester has quickly become a staple in many PowerShell developer's toolbelts and there seem to be new DSLs cropping up on a regular basis. Simplex, Pscribo, and even DSC are all examples of DSLs written in or for use in PowerShell. I'm not a big fan of DSLs and I'll explain why.
 
