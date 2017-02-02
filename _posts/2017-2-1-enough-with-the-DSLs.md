@@ -9,7 +9,7 @@ comments: true
 [DonJones]: https://powershell.org/2016/12/15/the-key-to-understanding-powershell-on-windows-or-linux/
 [Pester]: https://github.com/pester/Pester
 [Youtube]: https://www.youtube.com/watch?v=sefYvIFbG5M
-[Shovel]: /assets/media/Shovel.gif
+[Shovel]: /assets/media/Shovel.gif?raw=true
 
 ![][Shovel]
 
