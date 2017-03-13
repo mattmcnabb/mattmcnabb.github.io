@@ -1,6 +1,6 @@
 title: "\\PowerShell Escape"
 description: "a blog about Powershell, DevOps, and all things IT. \r\n homepage of Matt McNabb"
-BASE_PATH: mattmcnabb.github.io
+BASE_PATH:
 permalink: :title
 paginate: 6
 paginate_path: "page:num"
