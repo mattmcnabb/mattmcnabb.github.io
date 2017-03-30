@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Thoughts on Powershell Parameter Naming Conventions
-categories: [Active Directory, Powershell]
+title: Thoughts on PowerShell Parameter Naming Conventions
+tags: [Active Directory, PowerShell]
 author: Matt McNabb
 comments: true
 ---
@@ -9,9 +9,11 @@ comments: true
 [MVA]: http://www.microsoftvirtualacademy.com/training-courses/using-powershell-for-active-directory
 [MSDN]: http://msdn.microsoft.com/en-us/library/dd878270(v=vs.85).aspx
 
-If you haven't seen the Microsoft Virtual Academy series on Active Directory and Powershell yet, you should check it out [here][MVA]. Hosted by Ashley McGlone and Jason Helmick, it has tons of information on how to get started using Powershell to manage Active Directory and there is some great supplemental material that you can download and work through on your own.
+If you haven't seen the Microsoft Virtual Academy series on Active Directory and PowerShell yet, you should check it out [here][MVA]. Hosted by Ashley McGlone and Jason Helmick, it has tons of information on how to get started using PowerShell to manage Active Directory and there is some great supplemental material that you can download and work through on your own.
 
-Anyway, I was thinking about one of Jason's comments in the series regarding Powershell parameter naming conventions. Specifically he says that the `-Properties` parameter of `Get-Aduser` should be `-Property` instead. According to [MSDN][MSDN], Powershell cmdlet parameter names should always be singular unless they only take multiple values as an argument. Since `-Properties` accepts either a single value or an array of values, it should instead be -Property.
+Anyway, I was thinking about one of Jason's comments in the series regarding PowerShell parameter naming conventions. Specifically he says that the `-Properties` parameter of `Get-Aduser` should be `-Property` instead. According to [MSDN][MSDN], PowerShell cmdlet parameter names should always be singular unless they only take multiple values as an argument. Since `-Properties` accepts either a single value or an array of values, it should instead be -Property.
+
+<!--more-->
 
 First off, `-Property` is a valid alias for this parameter so if you type it this way instead it will still work. However tab completion will always fill out the plural version of the parameter. I think that this particular practice in general is flawed and I'll tell you why - because it doesn't help anyone.
 

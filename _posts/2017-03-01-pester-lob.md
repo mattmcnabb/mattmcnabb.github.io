@@ -1,16 +1,18 @@
 ---
 layout: post
 title: Test Business Rules with Pester
-categories: [PowerShell]
+tags: [PowerShell]
 author: Matt McNabb
 comments: true
 ---
 
 [Irwin]: https://pshirwin.wordpress.com/author/istrachan/
-[tests]: /assets/media/Test-ADStaffAttributes.png
-[quiet]: /assets/media/Test-ADStaffAttributesQuiet.png
+[tests]: /assets/img/Test-ADStaffAttributes.png
+[quiet]: /assets/img/Test-ADStaffAttributesQuiet.png
 
 Have you heard of this new thing called Pester? Seriously though, Pester is all over the place in the PowerShell world right now, and is now included in Windows 10 out of the box. Pester was created in 2011 by Scott Muc to satisfy his need for a unit testing framework in PowerShell, and since 2012 it has been lovingly developed by Dave Wyatt, Jakub Jares, and others. Currently in version 4.0.2, Pester is responsible for teaching developer practices to us lowly PowerShell scripters. One of the noticeable trends I've seen lately is using Pester for testing things that it was not designed for; infrastructure testing is the new buzz-word, and toward that end some Microsoft folks have offered up the Operation Validation Framework, a thin wrapper around Pester that allows for organizing infrastructure test code.
+
+<!--more-->
 
 I've been abusing Pester as well as of late, but towards slightly different objectives. I don't really know what to call this, so for now I'll just call it business rule testing. This testing strategy is checking to make sure that things in your environment are configured a certain way to match up to your business cases and the particular needs of your organization. How is this different than infrastructure testing? It's not really, but is just a slightly different way of looking at things and validating according to your particular needs. As an example, if I were performing infrastructure testing of my Active Directory environment, I might check on the domain and forest configurations, tests sites and links, DNS set-up, etc. [Irwin Strachan][Irwin] wrote some great articles detailing how he does this type of testing to validate AD infrastructure when going on site at a client. I'm not a field engineer - I'm chained to a desk - and for me there are unique business rules around user accounts that I need to validate on a regular basis to make sure our end users are up and running correctly.
 

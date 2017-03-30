@@ -1,21 +1,37 @@
 ---
 layout: null
 ---
+
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>{{ site.title }}</title>
-		<description>{{ site.description }}</description>
-		<link>{{ site.BASE_PATH }}/</link>
-		<atom:link href="{{ site.BASE_PATH }}/{{ site.rss_path }}" rel="self" type="application/rss+xml" />
-		{% for post in site.posts limit:10 %}
-			<item>
-				<title>{{ post.title }}</title>
-				<description>{{ post.content | xml_escape }}</description>
-				<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-				<link>{{ site.BASE_PATH }}{{ post.url }}</link>
-				<guid isPermaLink="true">{{ site.BASE_PATH }}{{ post.url }}</guid>
-			</item>
-		{% endfor %}
-	</channel>
+  <channel>
+    <title>{{ site.title | xml_escape }}</title>
+    <atom:link href="{{ '/feed.xml' | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
+    <link>{{ site.baseurl | prepend: site.url }}/</link>
+    <description>{{ site.description | xml_escape }}</description>
+    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
+    {% assign posts = '' | split: '' %}
+    {% for post in site.posts %}
+    {% if post.hide != true %}
+    {% assign posts = posts | push: post %}
+    {% endif %}
+    {% endfor %}
+    {% for post in posts limit:15 %}
+      {% include page-url-resolver.html page=post %}
+      <item>
+        <title>{{ post.title | xml_escape }} | {{ site.title | xml_escape }}</title>
+        {% if post.eye_catch %}
+        <image>
+          <url>{{ post.eye_catch }}</url>
+          <title>{{ post.title }}</title>
+          <link>{{ url }}</link>
+        </image>
+        {% endif %}
+        <link>{{ url }}</link>
+        <guid isPermaLink="true">{{ url }}</guid>
+        <description>{{ post.content | xml_escape }}</description>
+        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+      </item>
+    {% endfor %}
+  </channel>
 </rss>

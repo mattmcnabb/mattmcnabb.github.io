@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Challenge Yourself with Powershell Programming Tasks
-categories: [Powershell]
+title: Challenge Yourself with PowerShell Programming Tasks
+tags: [PowerShell]
 author: Matt McNabb
 comments: true
 ---
@@ -14,12 +14,14 @@ comments: true
 [IBeforeE]: http://rosettacode.org/wiki/I_before_E_except_after_C
 
 ### Scripting Outside the Box
-If you are like me, you probably took up Powershell as a way to address a particular business need. For me, that need was managing some aspects of Active Directory and Office 365. This is a great approach to learning the language, but it has its drawbacks as well. If you are only using Powershell to deal with the systems that you normally manage then you can get caught up 'in the box' and your learning can stagnate. A challenge I faced early on was how to keep the pace of learning up and continue to challenge myself. What I began to look for were arbitrary challenges that could help me take my Powershell problem solving to the next level. One website I found for this is [Rosetta Code][RosettaCode].
+If you are like me, you probably took up PowerShell as a way to address a particular business need. For me, that need was managing some aspects of Active Directory and Office 365. This is a great approach to learning the language, but it has its drawbacks as well. If you are only using PowerShell to deal with the systems that you normally manage then you can get caught up 'in the box' and your learning can stagnate. A challenge I faced early on was how to keep the pace of learning up and continue to challenge myself. What I began to look for were arbitrary challenges that could help me take my PowerShell problem solving to the next level. One website I found for this is [Rosetta Code][RosettaCode].
+
+<!--more-->
 
 Rosetta Code is a wiki community that focuses on comparing programming tasks in different languages. You can choose a programming task and then post your solution to the problem in the programming language of your choice. Some of the tasks are relatively complex math puzzles, others are word-based, and some are simply common tasks like reading text from a file or printing to the screen.
 
 ### A Sample Task
-My favorite tasks on Rosetta Code are the number challenges that got me thinking about how to achieve a Powershell solution in a more 'programmer-y' way. Here is one of the solutions I found that uses recursion to achieve a goal - [The Hailstone Sequence][Hailstone]. The task's description goes like this:
+My favorite tasks on Rosetta Code are the number challenges that got me thinking about how to achieve a PowerShell solution in a more 'programmer-y' way. Here is one of the solutions I found that uses recursion to achieve a goal - [The Hailstone Sequence][Hailstone]. The task's description goes like this:
 
 *The Hailstone sequence of numbers can be generated from a starting positive integer, n by:*
 
@@ -49,7 +51,7 @@ The third and fourth conditions are 'recursive cases' and decide how to modify 
 
 Get-Hailstone is quick! On my laptop it can calculate the hailstone sequence for a 50-digit number in less than 200 milliseconds.
 
-```powershell
+{% highlight PowerShell %}
 PS> Measure-Command {Get-HailStone -n 19287549016253467837652413987654200198276352456276}
 
 Days              : 0
@@ -63,7 +65,7 @@ TotalHours        : 5.52563333333333E-05
 TotalMinutes      : 0.00331538
 TotalSeconds      : 0.1989228
 TotalMilliseconds : 198.9228
-```
+{% endhighlight %}```
 
 ### Conclusion
 Here are some other tasks I have provided solutions to:

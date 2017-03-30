@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Office 365 Preservation Policies, or A Recursive Nightmare
-categories: [Office 365]
+tags: [Office 365]
 author: Matt McNabb
 comments: true
 ---
@@ -14,6 +14,8 @@ This will be a short blog post that serves as a warning to any folks out there t
 We recently decided to employ the new Office 365 Preservation Policies and we've become aware of a glaring issue that affects end users. It seems that when a Preservation Policy is applied to a Sharepoint Site, one unexpected affect is that folders can not be deleted if they contain any other items. The solution to this should be to delete items within folder first and then when it's empty, delete the folder.
 
 The real problem arises when a folder contains a OneNote Notebook. Sharepoint sees the notebook as a folder that contains files and will not allow the user to delete them. Users in our organization essentially can't perform common folder cleanup tasks due to an administrative feature that according to it's description should only affect files after they are deleted. This is a big problem.
+
+<!--more-->
 
 I have worked with Microsoft Support to troubleshoot the issue, and once we determined the scope of the problem they stated that the product team is aware and will be working to fix the problem. However, they are not able to provide any estimated delivery date for this fix. If you use Office 365 and this problem affects you, please vote up my [Uservoice item][Uservoice] here and let's get this fixed for our users!
 

@@ -1,8 +1,6 @@
-*Thumbs.db
-Gemfile.lock
-_site
-.sass-cache
-.jekyll-metadata
-.vscode
 .DS_Store
-_drafts
+_site/
+.bundle/
+.sass-cache/
+Gemfile.lock
+vendor/

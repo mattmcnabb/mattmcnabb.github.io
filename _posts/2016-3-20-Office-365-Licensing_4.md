@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Managing Office 365 User Licenses with PowerShell - Part 4
-categories: [Powershell, Office 365]
+tags: [PowerShell, Office 365]
 author: Matt McNabb
 comments: true
 ---
@@ -21,6 +21,8 @@ So far in this blog series I've covered the basics of user licensing in Office 3
 
 ### Problem 1 - DisabledPlans
 The biggest drawback to configuring user licenses via PowerShell lies in the design of the New-MsolLicenseOptions cmdlet. The problem is that the -DisabledPlans parameter is inherently the wrong approach to license automation. For example, let's say we've set up a script that licenses users for the EnterprisePack and you've added Sharepoint to the disabled plans. In it's original state, this would have enabled Exchange, Skype for Business, and Yammer. However, last year Microsoft added a new service plan to the license - Sway. This means that as soon as Sway became available as an assignable license in your tenant, Sway would have been assigned to your users because it hasn't been explicitly added to the list of disabled plans.
+
+<!--more-->
 
 So what we need to solve this problem is a method of setting enabled plans rather than disabled ones. That way no services will be provisioned for users unless you have explicitly added it in your script.
 

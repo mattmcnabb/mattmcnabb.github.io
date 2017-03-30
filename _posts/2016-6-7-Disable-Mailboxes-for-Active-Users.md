@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Disable Exchange Online Mailboxes for Active Users
-categories: [Office 365]
+tags: [Office 365]
 author: Matt McNabb
 comments: true
 ---
@@ -19,6 +19,8 @@ We have a type of user that only has need of a mailbox for a certain period of t
 
 When a mailbox is on Litigation Hold and the corresponding user is deleted, the mailbox is converted to "Inactive" and all it's data is retained. The [guidance provided by Microsoft][Inactive] for this all centers around employees who are leaving your organization which is why the trigger for converting to an inactive mailbox is the deletion of the user.
 
+<!--more-->
+
 In our case, however, we don't intend to delete these users but we would like to remove the mailboxes. This turned out to be a bit trickier than I would have thought. I asked about how best to achieve our goal [here][Community] but did not get a full answer, so I set out to experiment about how to achieve this. Here are the steps I followed to disable mailboxes for active Office 365 users:
 
 ### 1. Set the mailbox on Litigation Hold
@@ -33,7 +35,7 @@ Instructions for setting a mailbox to litigation hold can be found [here][LitHol
 
 This is how we remove the user's access to their Exchange Online mailbox. Once this is removed all entry points into Exchange Online will be hidden from the user, and sign-in will fail.
 
-You can remove the Exchange Online license using the Office 365 Admin Center, or you can use Powershell. To learn more about managing Office 365 user licenses with PowerShell, see my [blog series][LicenseBlog] on the topic. The key is that you should only remove the Exchange and Exchange Archiving service plans and leave any other applicable service plans in place.
+You can remove the Exchange Online license using the Office 365 Admin Center, or you can use PowerShell. To learn more about managing Office 365 user licenses with PowerShell, see my [blog series][LicenseBlog] on the topic. The key is that you should only remove the Exchange and Exchange Archiving service plans and leave any other applicable service plans in place.
 
 ### 3. Disable send and receive
 

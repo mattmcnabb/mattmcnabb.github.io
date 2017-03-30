@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Managing Office 365 User Licenses with PowerShell - Part 3
-categories: [Powershell, Office 365]
+tags: [PowerShell, Office 365]
 author: Matt McNabb
 comments: true
 ---
@@ -23,17 +23,19 @@ In the first two parts of this series I showed you how to find available license
 ### Finding currently assigned service plans
 The first step in modifying a user's license assignments is finding out what services they currently has been assigned. To do this, we use the `Get-MsolUser` cmdlet:
 
-```powershell
+<!--more-->
+
+{% highlight PowerShell %}
 PS> Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
 
 UserPrincipalName            DisplayName    isLicensed
 -----------------            -----------    ----------
 ronald.reagan@whitehouse.gov Ronald Reagan  True
-```
+{% endhighlight %}
 
 Ok, that doesn't give us much other than telling us that the user is licensed - let's try another approach:
 
-```powershell
+{% highlight PowerShell %}
 PS> $User = Get-MsolUser -UserPrincipalName ronald.reagan@whitehouse.gov
 PS> $User.Licenses
 
@@ -52,7 +54,7 @@ GroupsAssigningLicense : {}
 ServiceStatus          : {Microsoft.Online.Administration.ServiceStatus,
                          Microsoft.Online.Administration.ServiceStatus, Microsoft.Online.Administration.ServiceStatus,
                          Microsoft.Online.Administration.ServiceStatus...}
-```
+{% endhighlight %}
 
 That's progress, now we can see that the user has two licenses assigned, but we can't really see which service plans are enabled in each of those. The license objects returned are a bit complex and the properties are nested quite a bit, so we'll need to get a little script-y to get a view of this that makes sense:
 
@@ -62,12 +64,12 @@ That's progress, now we can see that the user has two licenses assigned, but we 
 
 If we run this in the console we should get something like this:
 
-```powershell
+{% highlight PowerShell %}
 AccountSkuId                               ServicePlans
 ------------                               ------------
 whitehouse:OFFICESUBSCRIPTION_FACULTY   OFFICESUBSCRIPTION
 whitehouse:STANDARDWOFFPACK_FACULTY     {YAMMER_EDU, EXCHANGE_S_STANDARD, SHAREPOINTWAC_EDU, SHAREPOINTENTERPRISE_EDU}
-```
+{% endhighlight %}
 
 Now we have it! We can now see that Ronnie has two licenses assigned and we can see which plans are enabled in each one.
 
@@ -75,24 +77,24 @@ Now we have it! We can now see that Ronnie has two licenses assigned and we can 
 
 We can see from the above example that Ronald has access to Office Pro Plus, Yammer, Exchange Online, Sharepoint and Onedrive, and Office Web Apps. Now let's say that he needs to have access to Skype for Business as well. From the previous post in this series we know that this service plan is called `MCOSTANDARD`. We'll use the `New-MsolLicenseOptions` cmdlet to set up the correct disabled plans:
 
-```powershell
+{% highlight PowerShell %}
 PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
-```
+{% endhighlight %}
 
 Now to actually modify the plan assignment we'll use the `Set-MsolUserLicense` cmdlet again, but with a key difference - since the user already has the license that contains plan assigned this time we don't use the `-AddLicenses` parameter:
 
-```powershell
+{% highlight PowerShell %}
 PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options
-```
+{% endhighlight %}
 
 Now if we re-run the script above to return the user's assigned licenses and plans, we should see that Skype for Business is enabled:
 
-```powershell
+{% highlight PowerShell %}
 AccountSkuId                               ServicePlans
 ------------                               ------------
 whitehouse:OFFICESUBSCRIPTION_FACULTY   OFFICESUBSCRIPTION
 whitehouse:STANDARDWOFFPACK_FACULTY     {YAMMER_EDU, MCOSTANDARD, EXCHANGE_S_STANDARD, SHAREPOINTWAC_EDU, SHAREPOINTENTERPRISE_EDU}
-```
+{% endhighlight %}
 
 > NOTE: If we had used the `-AddLicenses` parameter we'd get an error that tells us the license we're assigning is invalid. This isn't important right now, but we'll use that knowledge later when we expand on these processes to create a licensing solution.
 
@@ -100,10 +102,10 @@ whitehouse:STANDARDWOFFPACK_FACULTY     {YAMMER_EDU, MCOSTANDARD, EXCHANGE_S_STA
 
 To take this a step further, let's try an advanced example: say for instance that the user needs to have one currently assigned license modified while simultaneously adding a new license. This is possible because the license options objects contain the Sku ID that tells the `Set-MsolUserLicense` cmdlet which license to apply the options to. So if we want to modify the `STANDARDWOFFPACK_FACULTY` license just like the previous example, but we also want to add a Power BI license for the user, we'd do it like this:
 
-```powershell
+{% highlight PowerShell %}
 PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
 PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options -AddLicenses 'whitehouse:POWER_BI_STANDARD_FACULTY'
-```
+{% endhighlight %}
 
 ### Conclusion
 

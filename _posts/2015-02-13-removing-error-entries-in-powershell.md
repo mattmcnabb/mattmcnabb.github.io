@@ -1,19 +1,21 @@
 ---
 layout: post
-title: Remove Error Entries in Powershell Functions
-categories: [Powershell]
+title: Remove Error Entries in PowerShell Functions
+tags: [PowerShell]
 author: Matt McNabb
 comments: true
 ---
 
-[NullArray]: /assets/media/NullArrayError.png
-[RemoveAt]: /assets/media/RemoveAtError.png
+[NullArray]: /assets/img/NullArrayError.png
+[RemoveAt]: /assets/img/RemoveAtError.png
 
 Hi folks! Today's post will be a short one based on something I discovered while testing error handling in a module I'm working on.
 
 One of my module functions enumerates all the variables in the current session and checks the data type of each value. The function will return any variable values that match a particular custom data type.
 
 Inevitably some of the variables in any session are null. Since my code is looking for the TypeNames property of an object I use the 0 index of TypeNames to look at only the first value, an error is generated if there are no TypeName values:
+
+<!--more-->
 
 ![] [NullArray]
 

@@ -1,21 +1,23 @@
 ---
 layout: post
 title: ISE Steroids - Make It Yours
-categories: [Powershell, Editors]
+tags: [PowerShell, Editors]
 author: Matt McNabb
 comments: true
 ---
 
 [ISE]: https://technet.microsoft.com/en-us/library/dd819494.aspx
-[MyCommands]: /assets/media/MyCommands.png
-[WMITest]: /assets/media/WBEMTest.png
-[Tools]: /assets/media/ToolsMenu.png
-[RightClick]: /assets/media/RightClick1.png
-[Output]: /assets/media/SteroidsVersion.png
+[MyCommands]: /assets/img/MyCommands.png
+[WMITest]: /assets/img/WBEMTest.png
+[Tools]: /assets/img/ToolsMenu.png
+[RightClick]: /assets/img/RightClick1.png
+[Output]: /assets/img/SteroidsVersion.png
 
-In case you can't tell, I get excited about the tools I use. ISE Steroids has become a go-to tool for my Powershell scripting needs and has helped me get even better at doing what I do. ISE Steroids v2.0 RC2 was released a couple days ago and there are some great new capabilities that can help you customize the development experience even further. One very powerful feature is what Tobias calls '<a href="http://www.powertheshell.com/isesteroids-rc2-highlights/">Make it Yours</a>.'
+In case you can't tell, I get excited about the tools I use. ISE Steroids has become a go-to tool for my PowerShell scripting needs and has helped me get even better at doing what I do. ISE Steroids v2.0 RC2 was released a couple days ago and there are some great new capabilities that can help you customize the development experience even further. One very powerful feature is what Tobias calls '<a href="http://www.powertheshell.com/isesteroids-rc2-highlights/">Make it Yours</a>.'
 
-Make it Yours is a set of features that allow you to add custom commands to context menus in Powershell ISE. We have always had this in some respect using the ISE's native object model. You can create custom add-ons which execute any blocks of Powershell code that you like. Make it Yours takes this one step further and allows you to create commands that run from the Menu Bar or the right-click context menu, and you can now add custom tools into the Menu Bar's Tools menu.
+Make it Yours is a set of features that allow you to add custom commands to context menus in PowerShell ISE. We have always had this in some respect using the ISE's native object model. You can create custom add-ons which execute any blocks of PowerShell code that you like. Make it Yours takes this one step further and allows you to create commands that run from the Menu Bar or the right-click context menu, and you can now add custom tools into the Menu Bar's Tools menu.
+
+<!--more-->
 
 ###  Add a Right-Click Menu Entry
 To create a context menu entry, use Add-SteroidsContextMenuCommand. These context menu commands are dynamic, so you can specify which token types they are available for. To demonstrate, let's create a menu entry that will find details about the module that a given command belongs to:

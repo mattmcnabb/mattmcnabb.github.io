@@ -1,7 +1,7 @@
 ---
 layout: post
 title: PSCredential Gets a Makeover in PowerShell 5.0
-categories: [Powershell]
+tags: [PowerShell]
 author: Matt McNabb
 comments: true
 ---
@@ -9,7 +9,7 @@ comments: true
 [CredentialAttribute]: https://msdn.microsoft.com/en-us/library/system.management.automation.credentialattribute(v=vs.85).aspx
 [CredAttrExplain]: https://msdn.microsoft.com/en-us/library/ee857074(v=vs.85).aspx
 [ArgTransform]: https://msdn.microsoft.com/en-us/library/system.management.automation.argumenttransformationattribute(v=vs.85).aspx
-[PopUp]: /assets/media/CredAttrPopUp.png
+[PopUp]: /assets/img/CredAttrPopUp.png
 [PSCredential]: https://msdn.microsoft.com/en-us/library/system.management.automation.pscredential%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396
 
 During a recent talk I gave at the Cincinnati PowerShell User Group, I briefly demonstrated the technique I use to create advanced functions that accept credentials. I've been using this approach for a while and thought it would be great to show it off so others can take advantage of it. Of course like most demos it failed miserably. Here's why:
@@ -18,22 +18,37 @@ During a recent talk I gave at the Cincinnati PowerShell User Group, I briefly d
 
 In PowerShell 2 and above we could specify that a function parameter should accept objects of type `System.Management.Automation.PSCredential`, or use the type adapter `[PSCredential]` starting in v3.0:
 
+<!--more-->
+
 {% gist 68e381f01905177671ce133ef147e382 1.ps1 %}
+
+{% highlight PowerShell %}
+function Test-PSCredential
+{
+    param
+    (
+        [PSCredential]
+        $Credential
+    )
+
+    $Credential
+}
+{% endhighlight %}
 
 This parameter will accept a pre-created credential object and nothing else:
 
-```powershell
+{% highlight PowerShell %}
 PS> $Cred = Get-Credential
 PS> Test-PSCredential -Credential $Cred
-```
+{% endhighlight %}
 
 However, if you want to pass in a string username you're out of luck:
 
-```powershell
+{% highlight PowerShell %}
 PS> Test-PSCredential -Credential matt
-```
+{% endhighlight %}
 
-```console
+{% highlight console %}
 Test-PSCredential : Cannot process argument transformation on parameter 'Credential'. Cannot convert the "matt"
 value of type "System.String" to type "System.Management.Automation.PSCredential".
 At line:1 char:31
@@ -41,7 +56,7 @@ At line:1 char:31
 +                               ~~~~~~~~
     + CategoryInfo          : InvalidData: (:) [Test-PSCredential], ParameterBindingArgumentTransformationException
     + FullyQualifiedErrorId : ParameterArgumentTransformationError,Test-PSCredential
-```
+{% endhighlight %}
 
 To do this we need to use the [System.Management.Automation.CredentialAttribute()][CredentialAttribute] parameter attribute:
 
@@ -55,7 +70,7 @@ You can read about how this attribute works [here][CredAttrExplain]. When you us
 
 So I attempted to demonstrate this approach in my demo and found that when I ran `Test-PSCredential` I didn't receive an error - it behaved exactly the same way as using `CredentialAttribute()`! It seems that the `PSCredential` class has gotten a bit of an upgrade in PowerShell 5.0. Let's check it out:
 
-```powershell
+{% highlight PowerShell %}
 PS> Trace-Command -Expression {Test-PSCredential -Credential matt} -Name ParameterBinding -PSHost
 
 DEBUG: ParameterBinding Information: 0 : BIND arg [matt] to parameter [Credential]
@@ -66,7 +81,7 @@ DEBUG: ParameterBinding Information: 0 :         result returned from DATA GENER
 DEBUG: ParameterBinding Information: 0 :     COERCE arg to [System.Management.Automation.PSCredential]
 DEBUG: ParameterBinding Information: 0 :         Parameter and arg types the same, no coercion is needed.
 DEBUG: ParameterBinding Information: 0 :     BIND arg [System.Management.Automation.PSCredential] to param [Credential] SUCCESSFUL
-```
+{% endhighlight %}
 
 Using `Trace-Command` we can watch the parameter binding process and see that `PSCredential` is now leveraging the `CredentialAttribute` argument transformation in the background! This makes it really easy to create flexible function parameters that accept either a credential object, or a simple string username.
 

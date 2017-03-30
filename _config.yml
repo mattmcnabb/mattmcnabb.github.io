@@ -1,33 +1,60 @@
 title: "\\PowerShell Escape"
-description: "a blog about Powershell, DevOps, and all things IT. \r\n homepage of Matt McNabb"
-BASE_PATH:
-permalink: :title
-paginate: 6
-paginate_path: "page:num"
-disqus: mattmcnabbgithubio
-google_analytics: UA-69802890-1
-rss_path: feed.xml
-categories_path: categories.html
-tags_path: tags.html
-resources_path: resources.html
-
-highlighter: rouge
-markdown: kramdown
+description: "PowerShell, IT, thoughts, and ramblings | Homepage of Matt McNabb"
+url: http://localhost:4000
+#url: https://mattmcnabb.github.io
+baseurl: ""
+permalink: pretty
+favicon: /assets/img/favicon.ico
+avatar: /assets/img/PowerShellHero150x150.png
 
 author:
   name: Matt McNabb
+  bio: Windows Systems Engineer and PowerShell enthusiast | 2016 PowerShell.org PowerShell Hero
+  image: /assets/img/MattBW.png
+
+icons:
+  rss: true
   email: mmcnabb@outlook.com
   github: mattmcnabb
   twitter: mcnabbmh
-  bio: Windows Systems Engineer and PowerShell enthusiast | 2016 PowerShell.org PowerShell Hero
-  email_md5: 726351295ec82e145928582f595aa3aa
-  image: /assets/media/MattBW.png
+  linkedin: https://www.linkedin.com/in/mattmcnabb/
 
-# set it as url of an image
-sidebar_logo: /assets/media/PowerShellHero150x150.png
+google_analytics: UA-69802890-1
+disqus: mattmcnabbgithubio
 
-exclude: ["README.md","jekyll-metadata"]
+share_buttons:
+  twitter: true
+
+recent_posts_num: 10
+paginate: 10
+paginate_path: page/:num
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+excerpt_separator: <!--more-->
+str_next: Next
+str_prev: Prev
+str_read_more: Read more...
+str_search: Search
+str_recent_posts: Recent posts
+str_show_all_posts: Show all posts
+sass:
+  sass_dir: _sass
+  style: :compressed # or :expanded
+
 gems:
   - jekyll-paginate
   - jekyll-gist
   - jekyll-redirect-from
+  - jemoji
+
+include: ["_pages"]
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - vendor

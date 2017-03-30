@@ -1,21 +1,23 @@
 ---
 layout: post
 title: ISE Steroids Theme Manager
-categories: [Powershell, Editors]
+tags: [PowerShell, Editors]
 author: Matt McNabb
 comments: true
 ---
 
-[DarkModern]: /assets/media/DarkTheme.png "The Dark Modern Theme"
-[Solarized]: /assets/media/SolarizedTheme.png "The Solarized Theme"
+[DarkModern]: /assets/img/DarkTheme.png "The Dark Modern Theme"
+[Solarized]: /assets/img/SolarizedTheme.png "The Solarized Theme"
 [Snippets]: /posts/ise-steroids-snippet-manager.html
 [Profile]: /posts/portable-profile.html
-[WhiteRegion]: /assets/media/WhiteRegion.png "ISE Native Region Highlighting"
-[BlueRegion]: /assets/media/BlueRegion.png "ISE Steroids Region Highlighting"
+[WhiteRegion]: /assets/img/WhiteRegion.png "ISE Native Region Highlighting"
+[BlueRegion]: /assets/img/BlueRegion.png "ISE Steroids Region Highlighting"
 
-If you haven't heard about it yet, ISE Steroids is a premium add-on for the Powershell ISE that has tons of great new functionality for making your scripting experience more productive. I already covered it's snippets manager [here][Snippets].
+If you haven't heard about it yet, ISE Steroids is a premium add-on for the PowerShell ISE that has tons of great new functionality for making your scripting experience more productive. I already covered it's snippets manager [here][Snippets].
 
 Well now we have a release candidate version of ISE Steroids version 2 that has packed even more into this tiny little box (seriously - 39 MB!) So far my favorite is the new UI Theme Manager which allows you to manage the code syntax highlighting colors, fonts, and more. One of the cool features I had heard about was the capability to change token highlighting colors on the fly using the right-click context menu.
+
+<!--more-->
 
 ### Enable Theme Management
 The first time I launched ISE Steroids 2 RC I immediately opened a script and right-clicked on the function token and guess what? Nothing! What's the deal? Ok, so it wasn't really that hard to deal with, you just have to enable the theme management feature before you can use it. Go up to the upper right-hand corner of the toolbar and you'll see a new button for the UI Theme Manager. Click that and select Enable Theme Adjustment and you're all set. You can now right-click any token in the ISE and change the syntax highlighting color for that token type.
@@ -44,7 +46,7 @@ If you want to copy any custom themes you have already created in the ISE to the
 ![][Solarized]
 
 ### Take Them With You
-I take my Powershell profile with me using Onedrive, so I don't really want to create a custom theme on my local computer only. Here's a cool trick that will make your custom themes available anywhere you have access to Onedrive. First, set up a travelling profile following the instructions [here][Profile]. Next drop the ISESteroids module into your modules folder so it's always available. Inside the Steroids module there is a 'Themes' folder that contains the built-in themes. Now you can copy your custom themes from the appdata folder created previously into this folder and they will be available whenever you load the module.
+I take my PowerShell profile with me using Onedrive, so I don't really want to create a custom theme on my local computer only. Here's a cool trick that will make your custom themes available anywhere you have access to Onedrive. First, set up a travelling profile following the instructions [here][Profile]. Next drop the ISESteroids module into your modules folder so it's always available. Inside the Steroids module there is a 'Themes' folder that contains the built-in themes. Now you can copy your custom themes from the appdata folder created previously into this folder and they will be available whenever you load the module.
 
 ###  Visual Treat
 Overall I think the new theme management in ISE Steroids is a great addition that clears up some of the niggles I had with the native themes in the ISE. One really cool thing I noticed is the region highlighting in the script editor now works with dark backgrounds so you don't get those awful white regions in your otherwise slick-looking color scheme:

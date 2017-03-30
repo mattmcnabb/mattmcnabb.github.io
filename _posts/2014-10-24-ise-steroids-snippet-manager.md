@@ -1,24 +1,26 @@
 ---
 layout: post
 title: ISE Steroids Snippet Manager
-categories: [Powershell, Editors]
+tags: [PowerShell, Editors]
 author: Matt McNabb
 comments: true
 ---
 
-[1]: /assets/media/Snippet1.png
-[2]: /assets/media/Snippet2.png
-[3]: /assets/media/Snippet3.png
-[4]: /assets/media/Snippet4.png
-[5]: /assets/media/Snippet5.png
-[6]: /assets/media/Snippet6.png
-[7]: /assets/media/Snippet7.png
+[1]: /assets/img/Snippet1.png
+[2]: /assets/img/Snippet2.png
+[3]: /assets/img/Snippet3.png
+[4]: /assets/img/Snippet4.png
+[5]: /assets/img/Snippet5.png
+[6]: /assets/img/Snippet6.png
+[7]: /assets/img/Snippet7.png
 
-For those of us who write Powershell scripts frequently, ISE Steroids version 2.0 comes with some exciting new features. My favorite feature is the graphical Snippet Manager. It extends the ISE’s code snippet capabilities far beyond what you get out-of-the-box. It allows you to easily define your own snippets in the ISE and assign shortcuts to each.
+For those of us who write PowerShell scripts frequently, ISE Steroids version 2.0 comes with some exciting new features. My favorite feature is the graphical Snippet Manager. It extends the ISE’s code snippet capabilities far beyond what you get out-of-the-box. It allows you to easily define your own snippets in the ISE and assign shortcuts to each.
 
 Once you have downloaded ISESteroids and unzipped it to your module path, run Start-Steroids from the ISE console window to launch it.<!--more-->
 
 Click on the drop-down arrow just under the file menu to expand the ISE Steroids toolbar:
+
+<!--more-->
 
 ![][1]
 
@@ -45,9 +47,9 @@ To create a new snippet, select New from the far right side of the editor. Below
 9. Include Default Snippets – checking this box will allow Microsoft’s built in snippets to be displayed in the snippet menu
 
 ### Your First Snippet
-To create a snippet, simply enter some text in the snippet editor. A useful snippet is some Powershell code that you type frequently when at the console or the script editor.
+To create a snippet, simply enter some text in the snippet editor. A useful snippet is some PowerShell code that you type frequently when at the console or the script editor.
 
-I frequently create advanced functions so I am going to create a template function for my first snippet. Microsoft includes an advanced function snippet in Powershell by default, but it’s a very complex one with lots of parameter validations and things that I typically don’t need when creating a function from the ground up.
+I frequently create advanced functions so I am going to create a template function for my first snippet. Microsoft includes an advanced function snippet in PowerShell by default, but it’s a very complex one with lots of parameter validations and things that I typically don’t need when creating a function from the ground up.
 
 ![][5]
 
@@ -67,6 +69,6 @@ Press tab here and the snippet will be expanded out:
 
 You can see that the cursor was placed just inside the begin block as we planned.
 
-In case you were wondering, these snippets are saved to you default snippet directory in your Documents folder at WindowsPowershell/Snippets/.
+In case you were wondering, these snippets are saved to you default snippet directory in your Documents folder at WindowsPowerShell/Snippets/.
 
 That’s all there is to using the ISE Steroids 2.0 Snippet Manager. Thanks for reading!

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Creating a Custom Monitoring Solution with Microsoft Operations Management Suite - Part 1
-categories: [Powershell, OneLogin, OMS]
+tags: [PowerShell, OneLogin, OMS]
 author: Matt McNabb
 comments: true
 ---
@@ -15,6 +15,8 @@ My organization has been using OneLogin for quite some time now and it's a great
 ### The OneLogin PowerShell module
 
 To install the OneLogin PowerShell module from the PowerShell Gallery, run:
+
+<!--more-->
 
 {% gist 1e8585b12c7b0ef8b27fc6949ceb6bbd 3.ps1 %}
 
