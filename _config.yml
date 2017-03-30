@@ -3,7 +3,7 @@ description: "PowerShell, IT, thoughts, and ramblings | Homepage of Matt McNabb"
 #url: http://localhost:4000
 url: https://mattmcnabb.github.io
 baseurl: ""
-permalink: pretty
+permalink: :title
 favicon: /assets/img/favicon.ico
 avatar: /assets/img/PowerShellHero150x150.png
 
