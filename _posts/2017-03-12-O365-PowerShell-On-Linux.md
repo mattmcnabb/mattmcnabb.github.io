@@ -18,7 +18,7 @@ Here's how you can create an implicit remoting connection to Exchange Online:
 
 {% highlight PowerShell %}
 PS /home/matt> $O365Credential = Get-Credential
-PS /home/matt> $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+PS /home/matt> $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $O365Credential -Authentication Basic -AllowRedirection
 PS /home/matt> Import-PSSession -Session $Session
 {% endhighlight %}
 
@@ -39,7 +39,7 @@ Matthew McNabb            matt                 bn3pr07mb2755    49.5 GB (53,150,
 And the process for connecting to the Compliance Center is very similar:
 
 {% highlight PowerShell %}
-PS /home/matt> $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+PS /home/matt> $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $O365Credential -Authentication Basic -AllowRedirection
 PS /home/matt> Import-PSSession -Session $Session
 {% endhighlight %}
 
