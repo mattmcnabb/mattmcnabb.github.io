@@ -41,7 +41,7 @@ PS> $User.Licenses
 
 ExtensionData          : System.Runtime.Serialization.ExtensionDataObject
 AccountSku             : Microsoft.Online.Administration.AccountSkuIdentifier
-AccountSkuId           : whitehouse:OFFICESUBSCRIPTION_FACULTY
+AccountSkuId           : whitehouse:PROJECTONLINE
 GroupsAssigningLicense : {}
 ServiceStatus          : {Microsoft.Online.Administration.ServiceStatus,
                          Microsoft.Online.Administration.ServiceStatus, Microsoft.Online.Administration.ServiceStatus,
@@ -49,7 +49,7 @@ ServiceStatus          : {Microsoft.Online.Administration.ServiceStatus,
 
 ExtensionData          : System.Runtime.Serialization.ExtensionDataObject
 AccountSku             : Microsoft.Online.Administration.AccountSkuIdentifier
-AccountSkuId           : whitehouse:STANDARDWOFFPACK_FACULTY
+AccountSkuId           : whitehouse:ENTERPRISEPACK
 GroupsAssigningLicense : {}
 ServiceStatus          : {Microsoft.Online.Administration.ServiceStatus,
                          Microsoft.Online.Administration.ServiceStatus, Microsoft.Online.Administration.ServiceStatus,
@@ -65,10 +65,10 @@ That's progress, now we can see that the user has two licenses assigned, but we 
 If we run this in the console we should get something like this:
 
 {% highlight PowerShell %}
-AccountSkuId                               ServicePlans
-------------                               ------------
-whitehouse:OFFICESUBSCRIPTION_FACULTY   OFFICESUBSCRIPTION
-whitehouse:STANDARDWOFFPACK_FACULTY     {YAMMER_EDU, EXCHANGE_S_STANDARD, SHAREPOINTWAC_EDU, SHAREPOINTENTERPRISE_EDU}
+AccountSkuId                  ServicePlans
+------------                  ------------
+whitehouse:PROJECTONLINE      SHAREPOINT_PROJECT
+whitehouse:ENTERPRISEPACK     {YAMMER_ENTERPRISE, EXCHANGE_S_STANDARD, SHAREPOINTWAC, SHAREPOINTENTERPRISE}
 {% endhighlight %}
 
 Now we have it! We can now see that Ronnie has two licenses assigned and we can see which plans are enabled in each one.
@@ -78,7 +78,7 @@ Now we have it! We can now see that Ronnie has two licenses assigned and we can 
 We can see from the above example that Ronald has access to Office Pro Plus, Yammer, Exchange Online, Sharepoint and Onedrive, and Office Web Apps. Now let's say that he needs to have access to Skype for Business as well. From the previous post in this series we know that this service plan is called `MCOSTANDARD`. We'll use the `New-MsolLicenseOptions` cmdlet to set up the correct disabled plans:
 
 {% highlight PowerShell %}
-PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
+PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:ENTERPRISEPACK' -DisabledPlans 'Sway'
 {% endhighlight %}
 
 Now to actually modify the plan assignment we'll use the `Set-MsolUserLicense` cmdlet again, but with a key difference - since the user already has the license that contains plan assigned this time we don't use the `-AddLicenses` parameter:
@@ -90,21 +90,21 @@ PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -License
 Now if we re-run the script above to return the user's assigned licenses and plans, we should see that Skype for Business is enabled:
 
 {% highlight PowerShell %}
-AccountSkuId                               ServicePlans
-------------                               ------------
-whitehouse:OFFICESUBSCRIPTION_FACULTY   OFFICESUBSCRIPTION
-whitehouse:STANDARDWOFFPACK_FACULTY     {YAMMER_EDU, MCOSTANDARD, EXCHANGE_S_STANDARD, SHAREPOINTWAC_EDU, SHAREPOINTENTERPRISE_EDU}
+AccountSkuId                  ServicePlans
+------------                  ------------
+whitehouse:PROJECTONLINE      SHAREPOINT_PROJECT
+whitehouse:ENTERPRISEPACK     {YAMMER_ENTERPRISE, MCOSTANDARD, EXCHANGE_S_STANDARD, SHAREPOINTWAC, SHAREPOINTENTERPRISE}
 {% endhighlight %}
 
 > NOTE: If we had used the `-AddLicenses` parameter we'd get an error that tells us the license we're assigning is invalid. This isn't important right now, but we'll use that knowledge later when we expand on these processes to create a licensing solution.
 
 ### Extra credit
 
-To take this a step further, let's try an advanced example: say for instance that the user needs to have one currently assigned license modified while simultaneously adding a new license. This is possible because the license options objects contain the Sku ID that tells the `Set-MsolUserLicense` cmdlet which license to apply the options to. So if we want to modify the `STANDARDWOFFPACK_FACULTY` license just like the previous example, but we also want to add a Power BI license for the user, we'd do it like this:
+To take this a step further, let's try an advanced example: say for instance that the user needs to have one currently assigned license modified while simultaneously adding a new license. This is possible because the license options objects contain the Sku ID that tells the `Set-MsolUserLicense` cmdlet which license to apply the options to. So if we want to modify the `ENTERPRISEPACK` license just like the previous example, but we also want to add a Power BI license for the user, we'd do it like this:
 
 {% highlight PowerShell %}
-PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:STANDARDWOFFPACK_FACULTY' -DisabledPlans 'Sway'
-PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options -AddLicenses 'whitehouse:POWER_BI_STANDARD_FACULTY'
+PS> $Options = New-MsolLicenseOptions -AccountSkuId 'whitehouse:ENTERPRISEPACK' -DisabledPlans 'Sway'
+PS> Set-MsolUserLicense -UserPrincipalName ronald.reagan@whitehouse.gov -LicenseOptions $Options -AddLicenses 'whitehouse:POWER_BI_STANDARD'
 {% endhighlight %}
 
 ### Conclusion

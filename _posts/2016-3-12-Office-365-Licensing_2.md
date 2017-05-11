@@ -26,35 +26,35 @@ but to do this in bulk we'll need to use PowerShell.
 <!--more-->
 
 ### Finding available service plans
-Each license sku in Office 365 contains one or more service plans that can be enabled to provision a service for a user. These service plans include things like Exchange, Sharepoint, Skype for Business, and even external services like Sway or Intune. In part 1 of this series we looked at the Office 365 for Education license - let's take a look at how to find the services that are available in that sku:
+Each license sku in Office 365 contains one or more service plans that can be enabled to provision a service for a user. These service plans include things like Exchange, Sharepoint, Skype for Business, and even external services like Sway or Intune. In part 1 of this series we looked at the Office 365 Enterprise E3 license - let's take a look at how to find the services that are available in that sku:
 
 {% highlight PowerShell %}
-PS> Get-MsolAccountSku | Where-Object AccountSkuId -like '*Woffpack_fac*' | Select-Object -ExpandProperty ServiceStatus
+PS> Get-MsolAccountSku | Where-Object AccountSkuId -like '*enterprisepack*' | Select-Object -ExpandProperty ServiceStatus
 
-ServicePlan            ProvisioningStatus
------------            ------------------
-SWAY                   Success
-INTUNE_O365            PendingActivation
-YAMMER_EDU             Success
-SHAREPOINTWAC_EDU      Success
-MCOSTANDARD            Success
-SHAREPOINTSTANDARD_EDU Success
-EXCHANGE_S_STANDARD    Success
+ServicePlan                   ProvisioningStatus
+-----------                   ------------------
+SWAY                          Success
+INTUNE_O365                   PendingActivation
+YAMMER_ENTERPRISE             Success
+SHAREPOINTWAC                 Success
+MCOSTANDARD                   Success
+SHAREPOINTSTANDARD_ENTERPRISE Success
+EXCHANGE_S_ENTERPRISE         Success
 {% endhighlight %}
 
-So we can see that the service plans available to assign from the Office 365 for Education license are:
+So we can see that the service plans available to assign from the Office 365 Enterprise E3 license are:
 
 * Sway (*SWAY*)
-* Yammer (*YAMMER_EDU*)
-* Office Web Apps (*SHAREPOINTWAC-EDU*)
+* Yammer (*YAMMER_ENTERPRISE*)
+* Office Web Apps (*SHAREPOINTWAC*)
 * Skype or Business (*MCOSTANDARD*)
-* Sharepoint (*SHAREPOINTSTANDARD_EDU*; includes Onedrive for Business)
+* Sharepoint (*SHAREPOINTENTERPRISE*; includes Onedrive for Business)
 * Exchange (*EXCHANGE_S_STANDARD*)
 
-> NOTE: Intune's status is marked as *PendingActivation* because my organization has not purchased that service.
+> NOTE: If Intune's status is marked as *PendingActivation* it's because you haven't purchased that service.
 
 ### Assign selected service plans
-Last time we licensed Honest Abe with all included service plans in the Office 365 for Education license, so this time we'll find someone else and assign only select service plans from the license.
+Last time we licensed Honest Abe with all included service plans in the Office 365 Enterprise E3 license, so this time we'll find someone else and assign only select service plans from the license.
 
 {% highlight PowerShell %}
 PS> Get-MsolUser -UnlicensedUsersOnly
@@ -69,11 +69,11 @@ Ronald.Reagan@whitehouse.gov     Ronald Reagan     False
 This time we'll pick Ronald Reagan, and we only want to give him Exchange and Sharepoint. To do this, we need to learn a new cmdlet - `New-MsolLicenseOptions`. We'll run this before running the Set-MsolUserLicense cmdlet in order to configure the settings we want to assign along with the license. Pay special attention to the `-DisablePlans` parameter of `New-MsolLicenseOptions`, as this is how we configure selected service plans. Repeat - **Enabled service plans are configured by setting those that we want to be disabled**. If this sounds a little backward to you, then you'd be right and it can be problematic, and we'll talk more about that in a later post.
 
 {% highlight PowerShell %}
-PS> New-MsolLicenseOptions -AccountSkuId whitehouse:STANDARDWOFFPACK_FACULTY -DisabledPlans SWAY, YAMMER_EDU, SHAREPOINTWAC_EDU, MCOSTANDARD
+PS> New-MsolLicenseOptions -AccountSkuId whitehouse:ENTERPRISEPACK -DisabledPlans SWAY, YAMMER_ENTERPRISE, SHAREPOINTWAC, MCOSTANDARD
 
 ExtensionData AccountSkuId                                         DisabledServicePlans
 ------------- ------------                                         --------------------
-              Microsoft.Online.Administration.AccountSkuIdentifier {Sharepointstandard_edu}
+              Microsoft.Online.Administration.AccountSkuIdentifier {SWAY, YAMMER_ENTERPRISE, SHAREPOINTWAC, MCOSTANDARD}
 {% endhighlight %}
 
 Here we can see that running this command outputs an object of type `Microsoft.Online.Administration.LicenseOption` which can passed to the `Set-MsolUserLicense` cmdlet. In order to do that, we'll need to save this object in a variable:

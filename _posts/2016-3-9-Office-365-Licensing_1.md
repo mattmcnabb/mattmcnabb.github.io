@@ -85,21 +85,14 @@ PS> Get-MsolAccountSku
 
 AccountSkuId                              ActiveUnits WarningUnits ConsumedUnits
 ------------                              ----------- ------------ -------------
-whitehouse:POWER_BI_STANDARD_FACULTY      10          0            3
-whitehouse:STANDARDWOFFPACK_STUDENT       36001       0            1314
-whitehouse:EXCHANGEARCHIVE_ADDON_STUDENT  17000       0            1311
-whitehouse:PROJECTONLINE_PLAN_1_FACULTY   2451        0            7
-whitehouse:PLANNERSTANDALONE              300000      0            0
-whitehouse:EXCHANGEARCHIVE_ADDON_FACULTY  17000       0            37
-whitehouse:OFFICESUBSCRIPTION_FACULTY     2450        0            1805
-whitehouse:OFFICESUBSCRIPTION_STUDENT     18000       0            14165
-whitehouse:STANDARDWOFFPACK_FACULTY       4901        0            1982
+whitehouse:ENTERPRISEPACK                 25          0            4
+whitehouse:PROJECTONLINE                  25          0            7
 {% endhighlight %}
 
-What is returned by this cmdlet depends on what subscriptions you have purchased for your Office 365 tenant. The sku names are formulated using a combination of your tenant domain name and the license name. I work in public education, so our subscription contains faculty and student-focused skus. The one I'm looking for is `whitehouse:STANDARDWOFFPACK_FACULTY`, which is called "Office 365 for Education" in the Admin Center. Now to assign this license to the user I picked, I'll run this command:
+What is returned by this cmdlet depends on what subscriptions you have purchased for your Office 365 tenant. The sku names are formulated using a combination of your tenant domain name and the license name. For now we'll look at the one called `ENTERPRISEPACK`, which is called "Office 365 Enterprise E3" in the Admin Center. Now to assign this license to the user I picked, I'll run this command:
 
 {% highlight PowerShell %}
-PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY
+PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:ENTERPRISEPACK
 {% endhighlight %}
 
 Of course, you'll need to use the relevant user name and sku name from your tenant or you'll probably be greeted with an error when you run this command.
@@ -108,16 +101,16 @@ This will add the license for this user and enable any service plans that are co
 
 ### Assign multiple licenses
 
-Using Office apps on the web is great, but sometimes you just need the desktop applications to access the full feature set. In this case you'd want to add the previous license to a user and at the same time license him for Office Pro Plus so he can download and activate the Office suite right from his Office 365 account. Here's how that can be done:
+You could also assign the `ENTERPRISEPACK` and the `PROJECTONLINE` skus at the same time:
 
 {% highlight PowerShell %}
-PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:STANDARDWOFFPACK_FACULTY, whitehouse:OFFICESUBSCRIPTION_FACULTY
+PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:ENTERPRISEPACK, whitehouse:PROJECTONLINE
 {% endhighlight %}
 
-If our user already has the above license assigned and we need to tack on the Office Pro Plus subscription later, we can run this command:
+If our user already has the `ENTERPRISEPACK` license assigned and we need to tack on the `PROJECTONLINE` subscription later, we can run this command:
 
 {% highlight PowerShell %}
-PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:OFFICESUBSCRIPTION_FACULTY
+PS> Set-MsolUserLicense -UserPrincipalName abe.lincoln@whitehouse.gov -AddLicenses whitehouse:PROJECTONLINE
 {% endhighlight %}
 
 ### Conclusion

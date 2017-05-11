@@ -33,7 +33,7 @@ Cmdlet error with following error message:
 System.Management.Automation.parentContainsErrorRecordException: The term 'Get-clutter' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
     + Category Info         : NotSpecified: (:) [Get-Clutter], CmdletProxyException
     + FullyQua1ifiedErrorId : [Server-BY2PR023408h,RequestId=z25268ceb-120e-4f43-9b35-33Ec0ac02c5,Timestamp=5/25/2015 1:42:.27 PM [Failurecategoryzcmdlet-cmdletproxyexception] 5FE2AEFD,Microsoft.Exchange.Management.powershell.Support.GetC1utter
-    + PSComputerName        : pod15050.psh.outlook.com
+    + PSComputerName        : pod15150.psh.outlook.com
 {% endhighlight %}
 
 ### Turning Clutter Off

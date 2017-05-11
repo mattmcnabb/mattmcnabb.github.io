@@ -10,7 +10,7 @@ comments: true
 [ConnectCompliance]: https://technet.microsoft.com/en-us/library/mt587092(v=exchg.160).aspx
 [ProgBar]: /assets/img/O365linuxProgBar.png
 
-This Wednesday Microsoft announced the release of PowerShell 6.0 Alpha 17. One new feature in particular intrigued, and that's the capability to [connect to custom remoting configurations](https://github.com/PowerShell/psl-omi-provider/releases/tag/v1.0.0.18). This opens up the possibility of connecting to an Exchange endpoint, including Office 365. I manage Office 365 on a daily basis so I decided to give this a try from Linux just to see how and if it works. My set up for testing is a Hyper-V VM with Ubuntu 16.04 installed, and I installed PowerShell directly from the [Github releases page](https://github.com/PowerShell/PowerShell/releases/tag/v6.0.0-alpha.17).
+This Wednesday Microsoft announced the release of PowerShell 6.0 Alpha 17. One new feature in particular intrigued, and that's the capability to [connect to custom remoting configurations](https://github.com/PowerShell/psl-omi-provider/releases/tag/v1.0.0.18). This opens up the possibility of connecting to an Exchange endpoint, including Office 365. I just had to give this a try to see how and if it works. My set up for testing is a Hyper-V VM with Ubuntu 16.04 installed, and I installed PowerShell directly from the [Github releases page](https://github.com/PowerShell/PowerShell/releases/tag/v6.0.0-alpha.17).
 
 Here's how you can create an implicit remoting connection to Exchange Online:
 
@@ -33,7 +33,7 @@ PS /home/matt> get-mailbox 'matt'
 
 Name                      Alias                ServerName       ProhibitSendQuota                  
 ----                      -----                ----------       -----------------                  
-Matthew McNabb            matt                 bn3pr07mb2755    49.5 GB (53,150,220,288 bytes)
+Matt McNabb            matt                 bn3pr07mb2755    49.5 GB (53,150,220,288 bytes)
 {% endhighlight %}
 
 And the process for connecting to the Compliance Center is very similar:
