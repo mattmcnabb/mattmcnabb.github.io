@@ -24,6 +24,8 @@ If you're building PowerShell modules and want to get your feet wet with develop
 - Continuous integration in Appveyor
 - Module versioning
 
+<!--more-->
+
 ## Plaster
 
 [Plaster][Plaster] is an open source project from the PowerShell Team that helps you create new PowerShell projects from templates. It can be used directly from the command line and is also drives new project creation in the PowerShell extension for Visual Studio Code. To learn about creating your own Plaster templates, read the tutorials linked in the Github readme. You'll have to futz with the XML manifest a bit to get it working the way you want, but overall I found it relatively easy to get a new template up and running.
