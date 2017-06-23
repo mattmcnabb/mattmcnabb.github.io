@@ -8,11 +8,11 @@ comments: true
 
 Today I received an invitation to preview PowerShell in Azure Cloud Shell (PSCloudShell). Azure Cloud Shell is a new feature added to Azure earlier this year which allowed us to run a Bash console inside our web browser to manage our Azure resources. Microsoft has just added PowerShell to this as well and I'm already having a blast poking around to see how this works and imagining all the possibilities.
 
-<!--more-->
-
 When I first launched the PSCloudShell interface I noticed it took quite a while to get up and running. You're required to set up a storage account to store all the necessary artifacts you need to run PowerShell such as modules, scripts, etc. Once the shell launches for the first time you'll see a familiar prompt, with the location set to "Azure."
 
 ![](/assets/img/CloudPS.png)
+
+<!--more-->
 
 This is interesting, and Get-ChildItem reveals a bit more about how this works:
 
