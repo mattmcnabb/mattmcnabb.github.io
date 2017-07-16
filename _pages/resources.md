@@ -13,7 +13,7 @@ _$ = paid resource_
 ## Learning
 - [List of PowerShell Videos – from Ashley McGlone](https://blogs.technet.microsoft.com/ashleymcglone/2016/04/01/powershell-video-training-from-microsoft)
 - [PowerShell.org Free eBooks](http://powershell.org/wp/ebooks)
-- [$ Learn Windows PowerShell in a Month of Lunches](http://www.amazon.com/Learn-Windows-PowerShell-Month-Lunches/dp/1617291080/ref=sr_1_2?ie=UTF8&amp;qid=1461942291&amp;sr=8-2&amp;keywords=powershell+in+action)
+- [Learn Windows PowerShell in a Month of Lunches](http://www.amazon.com/Learn-Windows-PowerShell-Month-Lunches/dp/1617291080/ref=sr_1_2?ie=UTF8&amp;qid=1461942291&amp;sr=8-2&amp;keywords=powershell+in+action) - $
 
 ## Forums
 - [Spiceworks PowerShell Group](http://community.spiceworks.com/programming/powershell)
@@ -43,7 +43,7 @@ _$ = paid resource_
 - [PowerShell Magazine](http://www.powershellmagazine.com/tag/pester)
 - [Michael Sorens Pester Tutorial](https://www.simple-talk.com/sysadmin/powershell/practical-powershell-unit-testing-getting-started)
 - [June Blender - TDD with Pester](https://www.youtube.com/watch?v=jvvh9cpD_LM)
-- [$ The Pester Book](https://leanpub.com/pesterbook)
+- [The Pester Book](https://leanpub.com/pesterbook) - $
 
 ## Office 365
 - [PowerShell for Office 365 - Home](http://powershell.office.com)
