@@ -4,6 +4,8 @@ title: Resources
 permalink: /resources/
 header: some useful links
 group: navigation
+redirect_from:
+  - /resources.html
 ---
 
 _$ = paid resource_
