@@ -11,6 +11,8 @@ At Ignite earlier this week Microsoft announced the PSCloudShell preview would b
 # What is SHiPS?
 SHiPS is a new module that Microsoft has made available in PSCloudShell, and it gives PowerShell developers the ability to create PowerShell providers written in PowerShell. It exposes a set of classes that you can inherit to create functionality similar to providers written in C# or another .NET Framework language, but without all the mucky-muck. To achieve this it leverages an existing open source project called [Simplex](https://github.com/beefarino/simplex) from Jim Christopher (AKA Beefarino) of CodeOwls.
 
+<!--more-->
+
 # But What is a PowerShell Provider?
 A PowerShell provider is an abstract interface that allows you to navigate data hierarchies in a familiar manner, similar to navigating a file system tree. In fact, the Windows file system is made available to PowerShell by using a provider. Providers give you the ability to create drives, which are conceptually equivalent to a file system drive in Windows. Run [Get-Help about_providers](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_providers?view=powershell-5.1) to get a better idea of providers and what they are capable of.
 
