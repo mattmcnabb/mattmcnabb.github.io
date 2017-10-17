@@ -25,35 +25,38 @@ In order to demonstrate how to create a PowerShell provider with SHiPS, I first 
 ## The data
 Here's what the tree will look like:
 
-### Solar System
-- Mercury
-- Venus
-- Earth
-    - Luna
-- Mars
-    - Deimos
-    - Phobos
-- Jupiter
-    - Io
-    - Europa
-    - Ganymede
-    - Calisto
-    - Thebe
-- Saturn
-    - Titan
-    - Rhea
-    - Dione
-    - Tethys
-    - Iapetus
-- Uranus
-    - Oberon
-    - Titania
-    - Umbriel
-    - Ariel
-    - Miranda
-- Neptune
-    - Proteus
-    - Triton
+```
+Solar System
+├───Mercury
+├───Venus
+├───Earth
+│    └───Luna
+├───Mars
+│   └───Deimos
+|   └───Phobos
+├───Jupiter
+│   └───Io
+│   └───Europa
+│   └───Ganymede
+│   └───Calisto
+│   └───Thebe
+├───Saturn
+│   └───Titan
+│   └───Rhea
+│   └───Dione
+│   └───Tethys
+│   └───Iapetus
+├───Uranus
+│   └───Oberon
+│   └───Titania
+│   └───Umbriel
+│   └───Ariel
+│   └───Miranda
+└───Neptune
+    └───Proteus
+    └───Triton
+
+```
 
 > #### DISCLAIMER
 > Although SHiPS is publicly available in PSCloudShell, there is no license included, so I don't believe it would be wise to distribute it in any way. That said I don't believe it would violate any licensing restrictions to simply inherit from the base classes in your own project. Also please remember that PSCloudShell is still in public preview and SHiPS is still probably quite incomplete, so I wouldn't be surprised to see some major changes to it in the near future.
@@ -173,7 +176,7 @@ Mode  Name
 {% endhighlight %}
 
 # Further capabilities
-So far I've only demonstrated how to create a navigable tree using Get-ChildItem, but providers offer many more features such as creating, renaming and removing items, and some lesser-known features such as transactions. The SHiPS module doesn't appear to implement these feature yet, but it may in the future. Right now I'll stick to what I can see demonstrated by the authors of the AzurePSDrive module in PSCloudShell.
+So far I've only demonstrated how to create a navigable tree using Get-ChildItem, but providers offer many more features such as creating, renaming and removing items, and some lesser-known features such as transactions. The SHiPS module doesn't appear to implement these features yet, but it may in the future. Right now I'll stick to what I can see demonstrated by the authors of the AzurePSDrive module in PSCloudShell.
 
 # Conclusion
 Pretty cool, right? Now imagine that you can leverage providers with any of your own modules using SHiPS. I think it would be fascinating to try this with one of my own projects - for instance, one that works against a REST API. I hope you've found this article useful and I can't wait to see how others use the SHiPS module in their projects.
