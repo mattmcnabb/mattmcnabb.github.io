@@ -30,7 +30,7 @@ Solar System
 ├───Mercury
 ├───Venus
 ├───Earth
-│    └───Luna
+│   └───Luna
 ├───Mars
 │   └───Deimos
 |   └───Phobos
