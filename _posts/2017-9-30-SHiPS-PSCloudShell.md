@@ -180,7 +180,7 @@ So far I've only demonstrated how to create a navigable tree using Get-ChildItem
 # Conclusion
 Pretty cool, right? Now imagine that you can leverage providers with any of your own modules using SHiPS. I think it would be fascinating to try this with one of my own projects - for instance, one that works against a REST API. I hope you've found this article useful and I can't wait to see how others use the SHiPS module in their projects.
 
-> # Update 10/26/2017
+> ## Update 10/26/2017
 > Microsoft released the SHiPS module on the PowerShell Gallery on 10/17/2017, so you can now install it locally using the command `Install-Module SHiPS`. They've also included [documentation and examples]>(https://github.com/PowerShell/SHiPS/blob/development/docs/README.md) to help you get started.
 > 
 > Also, it should be noted that the statement above that SHiPS is a wrapper for Simplex is incorrect. Simplex and SHiPS both leverage Jim Christopher's [P2F](https://github.com/beefarino/p2f) which is a framework for creating PowerShell providers. However, the comparison between Simplex's DSL implementation and SHiPS' class inheritance approach is still accurate.
