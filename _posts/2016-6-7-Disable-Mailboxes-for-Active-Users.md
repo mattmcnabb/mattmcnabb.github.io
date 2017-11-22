@@ -15,7 +15,7 @@ comments: true
 
 This will be a quick post to detail the steps I took to resolve an issue in Exchange Online where we had a very specific use case for mailbox compliance.
 
-We have a type of user that only has need of a mailbox for a certain period of time, and once this time is passed then according to our policy access to that mailbox will be removed. However, other services in Office 365 such as Onedrive for Business and the Office Pro Plus subscription will need to be retained. Our compliance policy also dictates that the mailbox data will need to be retained for an extended period of time. We user Litigation Hold to achieve this retention.
+We have a type of user that only has need of a mailbox for a certain period of time, and once this time has passed then according to our policy access to that mailbox will be removed. However, other services in Office 365 such as Onedrive for Business and the Office Pro Plus subscription will need to be retained. Our compliance policy also dictates that the mailbox data will need to be retained for an extended period of time. We use Litigation Hold to achieve this retention.
 
 When a mailbox is on Litigation Hold and the corresponding user is deleted, the mailbox is converted to "Inactive" and all it's data is retained. The [guidance provided by Microsoft][Inactive] for this all centers around employees who are leaving your organization which is why the trigger for converting to an inactive mailbox is the deletion of the user.
 
@@ -41,7 +41,7 @@ You can remove the Exchange Online license using the Office 365 Admin Center, or
 
 This one was tricky. Although removing the Exchange license for a user removes their access to their mailbox, the mailbox itself can still receive email messasges. While this is not a huge deal, I didn't want to create the false impression that a deprovisioned mailbox was still in active use, so I decided to leverage a transport rule to handle this.
 
-To create a transport rule that prevents sending and receving for these mailboxes, first you'll need to create a new distribution group and add your mailboxes to it. I called mine "DisabledMailboxes". Once you've done this, create a new transport rule with the following conditions:
+To create a transport rule that prevents sending and receving for these mailboxes, first you'll need to create a new distribution group and add your mailboxes to it. I called mine "DisabledMailboxes," and hid it from the Global Address List. Once you've done this, create a new transport rule with the following conditions:
 
 1. If the message is sent to a member of the group "DisabledMailboxes@domain.onmicrosoft.com"
 
